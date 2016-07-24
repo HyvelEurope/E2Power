@@ -11,8 +11,7 @@ local function explodeData(STR)
 	return string.Explode(" ",STR,false)
 end
 
-local function umsgData(ply,com,arg,sas)
-	print(string.len(sas))
+local function umsgData(ply,com,arg)
 	local Data = explodeData(arg[1])
 	local PrepTbl = {}
 	PrepTbl.id   = Data[1]
@@ -24,8 +23,7 @@ local function umsgData(ply,com,arg,sas)
 end
 concommand.Add("_snddat",umsgData)
 
-local function umsgFFT(ply,com,arg,sas)
-	print(string.len(sas))
+local function umsgFFT(ply,com,arg)
 	local Data = explodeData(arg[1])
 	local PrepTbl = {}
 	for id = 2,#Data do
