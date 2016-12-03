@@ -22,14 +22,14 @@ e2function void entity:plySkinColor(vector rgb) -- Zimon4eR
 	this:SetPlayerColor(Vector( rgb[1]/255, rgb[2]/255, rgb[3]/255))
 end
 
-e2function vector entity:GetWeaponColor() -- Zimon4eR
+e2function vector entity:getWeaponColor() -- Zimon4eR
 	if !IsValid(this)  then return end
 	if !this:IsPlayer() then return end
 	local Vec = this:GetWeaponColor()
 	return Vec
 end
 
-e2function vector entity:GetSkinColor() -- Zimon4eR
+e2function vector entity:getSkinColor() -- Zimon4eR
 	if !IsValid(this)  then return end
 	if !this:IsPlayer() then return end
 	local Vec = this:GetPlayerColor()
