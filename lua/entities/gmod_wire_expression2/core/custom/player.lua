@@ -1,27 +1,6 @@
 -- made by [G-moder]FertNoN
--- edit by Zimon4eR (TheSlyFox)
 
 __e2setcost(20)
-e2function void entity:plyPhysgunColor(vector rgb) -- Zimon4eR
-	if !IsValid(this)  then return end
-	if !this:IsPlayer() then return end
-	if !isOwner(self, this) then return end
-	rgb[1] = math.Clamp(rgb[1],0,255)
-	rgb[2] = math.Clamp(rgb[2],0,255)
-	rgb[3] = math.Clamp(rgb[3],0,255)
-	this:SetWeaponColor(Vector( rgb[1]/255, rgb[2]/255, rgb[3]/255))
-end
-
-e2function void entity:plySkinColor(vector rgb) -- Zimon4eR
-	if !IsValid(this)  then return end
-	if !this:IsPlayer() then return end
-	if !isOwner(self, this) then return end
-	rgb[1] = math.Clamp(rgb[1],0,255)
-	rgb[2] = math.Clamp(rgb[2],0,255)
-	rgb[3] = math.Clamp(rgb[3],0,255)
-	this:SetPlayerColor(Vector( rgb[1]/255, rgb[2]/255, rgb[3]/255))
-end
-
 e2function void entity:playerFreeze()
 	if !IsValid(this)  then return end
 	if !isOwner(self, this)  then return end
