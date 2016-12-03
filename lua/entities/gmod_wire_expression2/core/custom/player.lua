@@ -1,41 +1,43 @@
 -- made by [G-moder]FertNoN
 -- edit by Zimon4eR (TheSlyFox)
 
-__e2setcost(20)
+__e2setcost(100)
 e2function void entity:plyPhysgunColor(vector rgb) -- Zimon4eR
 	if !IsValid(this)  then return end
 	if !this:IsPlayer() then return end
 	if !isOwner(self, this) then return end
-	rgb[1] = math.Clamp(rgb[1],0,255)
-	rgb[2] = math.Clamp(rgb[2],0,255)
-	rgb[3] = math.Clamp(rgb[3],0,255)
-	this:SetWeaponColor(Vector( rgb[1]/255, rgb[2]/255, rgb[3]/255))
+	local Vec = Vector(rgb)							-- Doing this because of weird bug
+	Vec[1] = math.Clamp(Vec[1],0,255)
+	Vec[2] = math.Clamp(Vec[2],0,255)
+	Vec[3] = math.Clamp(Vec[3],0,255)
+	this:SetWeaponColor(Vec)
 end
 
 e2function void entity:plySkinColor(vector rgb) -- Zimon4eR
 	if !IsValid(this)  then return end
 	if !this:IsPlayer() then return end
 	if !isOwner(self, this) then return end
-	rgb[1] = math.Clamp(rgb[1],0,255)
-	rgb[2] = math.Clamp(rgb[2],0,255)
-	rgb[3] = math.Clamp(rgb[3],0,255)
-	this:SetPlayerColor(Vector( rgb[1]/255, rgb[2]/255, rgb[3]/255))
+	local Vec = Vector(rgb)
+	Vec[1] = math.Clamp(Vec[1],0,255)
+	Vec[2] = math.Clamp(Vec[2],0,255)
+	Vec[3] = math.Clamp(Vec[3],0,255)
+	this:SetPlayerColor(Vec)
 end
 
 e2function vector entity:getWeaponColor() -- Zimon4eR
 	if !IsValid(this)  then return end
 	if !this:IsPlayer() then return end
-	local Vec = this:GetWeaponColor()
-	return Vec
+	local Vec = this:GetWeaponColor()*255
+	return {math.floor(Vec[1]),math.floor(Vec[2]),math.floor(Vec[3])}
 end
 
 e2function vector entity:getSkinColor() -- Zimon4eR
 	if !IsValid(this)  then return end
 	if !this:IsPlayer() then return end
-	local Vec = this:GetPlayerColor()
-	return Vec
+	local Vec = this:GetPlayerColor()*255
+	return {math.floor(Vec[1]),math.floor(Vec[2]),math.floor(Vec[3])}
 end
-
+__e2setcost(20)
 e2function void entity:playerFreeze()
 	if !IsValid(this)  then return end
 	if !isOwner(self, this)  then return end
