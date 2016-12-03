@@ -6,10 +6,10 @@ e2function void entity:plyPhysgunColor(vector rgb) -- Zimon4eR
 	if !IsValid(this)  then return end
 	if !this:IsPlayer() then return end
 	if !isOwner(self, this) then return end
-	local Vec = Vector(rgb)							-- Doing this because of weird bug
-	Vec[1] = math.Clamp(Vec[1],0,255)
-	Vec[2] = math.Clamp(Vec[2],0,255)
-	Vec[3] = math.Clamp(Vec[3],0,255)
+	local Vec = Vector(0,0,0)
+	Vec[1] = math.Clamp(rgb[1],0,255)/255
+	Vec[2] = math.Clamp(rgb[2],0,255)/255
+	Vec[3] = math.Clamp(rgb[3],0,255)/255
 	this:SetWeaponColor(Vec)
 end
 
@@ -17,10 +17,10 @@ e2function void entity:plySkinColor(vector rgb) -- Zimon4eR
 	if !IsValid(this)  then return end
 	if !this:IsPlayer() then return end
 	if !isOwner(self, this) then return end
-	local Vec = Vector(rgb)
-	Vec[1] = math.Clamp(Vec[1],0,255)
-	Vec[2] = math.Clamp(Vec[2],0,255)
-	Vec[3] = math.Clamp(Vec[3],0,255)
+	local Vec = Vector(0,0,0)
+	Vec[1] = math.Clamp(rgb[1],0,255)/255
+	Vec[2] = math.Clamp(rgb[2],0,255)/255
+	Vec[3] = math.Clamp(rgb[3],0,255)/255
 	this:SetPlayerColor(Vec)
 end
 
