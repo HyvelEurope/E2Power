@@ -1,3 +1,7 @@
+[![](https://img.shields.io/github/issues-raw/l33trs/e2power.svg)]()
+[![](https://img.shields.io/github/release/l33trs/e2power.svg)]()
+[![](https://img.shields.io/github/license/l33trs/e2power.svg)]()
+
 # E2Power
 E2Power или E2P - это дополнение для Wiremod, а точнее для E2 добавляющее множество полезных (и не очень) команд.
 
