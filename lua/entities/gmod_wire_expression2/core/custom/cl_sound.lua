@@ -150,7 +150,6 @@ local function getData(data)
 end
 
 timer.Create("get_data_on_server",0.1,0,function()
-	--print(entid,traid)
 	local E2    = ents.GetByIndex(entid)
 		
 	if E2 != nil and E2 != NULL then
