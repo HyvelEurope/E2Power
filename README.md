@@ -28,7 +28,7 @@ E2Power или E2P - это дополнение для Wiremod, а точнее
 + Супер-админы заменены на админов.
 + Сделан перевод панели E2Power в меню Q.
 + Удалена нерабочая команда и кнопка для нее (e2power_set_pass_free).
-+ Добавлены функции e:plyWeaponColor(v), e:plySkinColor(v), e:getWeaponColor(), e:getPlayerColor().
++ Добавлены функции e:setWeaponColor(v), e:setPlayerColor(v), e:getWeaponColor(), e:getPlayerColor().
 
 ## Авторы
 

@@ -2,7 +2,7 @@
 -- edit by Zimon4eR (TheSlyFox)
 
 __e2setcost(100)
-e2function void entity:plyPhysgunColor(vector rgb) -- Zimon4eR
+e2function void entity:setWeaponColor(vector rgb) -- Zimon4eR
 	if !IsValid(this)  then return end
 	if !this:IsPlayer() then return end
 	if !isOwner(self, this) then return end
@@ -13,7 +13,7 @@ e2function void entity:plyPhysgunColor(vector rgb) -- Zimon4eR
 	this:SetWeaponColor(Vec)
 end
 
-e2function void entity:plySkinColor(vector rgb) -- Zimon4eR
+e2function void entity:setPlayerColor(vector rgb) -- Zimon4eR
 	if !IsValid(this)  then return end
 	if !this:IsPlayer() then return end
 	if !isOwner(self, this) then return end
@@ -31,7 +31,7 @@ e2function vector entity:getWeaponColor() -- Zimon4eR
 	return {math.floor(Vec[1]),math.floor(Vec[2]),math.floor(Vec[3])}
 end
 
-e2function vector entity:getSkinColor() -- Zimon4eR
+e2function vector entity:getPlayerColor() -- Zimon4eR
 	if !IsValid(this)  then return end
 	if !this:IsPlayer() then return end
 	local Vec = this:GetPlayerColor()*255
