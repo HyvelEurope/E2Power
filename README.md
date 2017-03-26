@@ -42,4 +42,4 @@ E2Power или E2P - это дополнение для Wiremod, а точнее
 + [Steam](http://steamcommunity.com/id/Tengz/)
 
 **Zimon4eR**
-+ [Steam] (http://steamcommunity.com/id/Zimon4eR/)
++ [Steam](http://steamcommunity.com/id/Zimon4eR/)
