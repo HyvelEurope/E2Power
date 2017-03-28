@@ -282,7 +282,7 @@ local function E2Power_BuildPanel(Panel)
 	Panel.VersionText=vgui.Create("DLabel")
 		Panel.VersionText:SetColor(BackColor)
 		Panel.VersionText:SetFont("SkyDermaArial_I_17")
-		Panel.VersionText:SetText(" FertNoN - E2Power\n SkyAngeLoL - меню\n Tengz - перевод и доработка")
+		Panel.VersionText:SetText(" FertNoN - E2Power\n SkyAngeLoL - меню\n Tengz - перевод и доработка\n Zimon4eR - дополнение и доработка")
 		Panel.VersionText:SizeToContents()
 	Panel:AddItem(Panel.VersionText)
 	////////
