@@ -65,7 +65,8 @@ local function E2Power_BuildPanel(Panel)
 			Panel.GetListBut:SetSize(200,18)
 			Panel.GetListBut.DoClick=function()
 				for _,ply in pairs(player.GetAll()) do
-					LocalPlayer():ChatPrint(ply:Nick()..' - '..tostring(GetPlyAccess(ply)))
+					local Access = GetPlyAccess(ply)
+					chat.AddText(ply:Nick()..' - ', Access and Color(65, 255, 65) or Color(255, 65, 65), tostring(Access))
 				end
 			end
 		Panel.UserPanel:AddItem(Panel.GetListBut)
