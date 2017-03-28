@@ -29,6 +29,7 @@ E2Power или E2P - это дополнение для Wiremod, а точнее
 + Сделан перевод панели E2Power в меню Q.
 + Удалена нерабочая команда и кнопка для нее (e2power_set_pass_free).
 + Добавлены функции e:setWeaponColor(v), e:setPlayerColor(v), e:getWeaponColor(), e:getPlayerColor().
++ Изменен лимит размера партиклей с 3000 до 800.
 
 ## Авторы
 
