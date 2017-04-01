@@ -23,12 +23,12 @@ E2Power или E2P - это дополнение для Wiremod, а точнее
 + Добавлена функция entity:hasGodMode.
 + Пофикшена функция setParent (больше не удаляет игроков)
 + Обычные игроки не могут менять содержание Expression чипa администрации.
-+ Кое-как пофикшен баг с soundURLload, при котором не возпроизводились длинные ссылки.
++ Пофикшен баг с soundURLload, при котором не возпроизводились длинные ссылки.
 + Возпроизводить музыку на всю карту (используя soundURLload) могут игроки, имеющие доступ к E2Power.
 + Супер-админы заменены на админов.
 + Сделан перевод панели E2Power в меню Q.
 + Удалена нерабочая команда и кнопка для нее (e2power_set_pass_free).
-+ Добавлены функции e:setWeaponColor(v), e:setPlayerColor(v), e:getWeaponColor(), e:getPlayerColor().
++ Добавлены функции entity:setWeaponColor(v), entity:setPlayerColor(v), entity:getWeaponColor(), entity:getPlayerColor().
 + Изменен лимит размера партиклей с 3000 до 800.
 
 ## Авторы
