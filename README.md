@@ -5,7 +5,7 @@
 # E2Power
 E2Power или E2P - это дополнение для Wiremod, а точнее для E2 добавляющее множество полезных (и не очень) команд.
 
-## Отличия от оригинальной версии
+## Изменения
 
 + Для функций entity:setKeyValue() и entity:setFire() был введён чёрный список. Админы игнорируют чёрный список.
 + Были пофикшены функции entity:removeOnDelete(entity) и entity:setUndoName(string), array:setUndoName(string). Теперь они не могут удалять игроков.
