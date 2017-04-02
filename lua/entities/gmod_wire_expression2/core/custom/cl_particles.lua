@@ -32,7 +32,7 @@ function use_message(message)
 
 	local centr	= message:ReadVector()
 	local Color	= message:ReadVector()
-	local Vec = message:ReadVector()
+	local Vel = message:ReadVector()
 
 	local PartType = message:ReadString()
 
