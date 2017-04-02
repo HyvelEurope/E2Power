@@ -30,7 +30,7 @@ E2Power или E2P - это дополнение для Wiremod, а точнее
 + Удалена нерабочая команда и кнопка для нее (e2power_set_pass_free).
 + Добавлены функции entity:setWeaponColor(v), entity:setPlayerColor(v), entity:getWeaponColor(), entity:getPlayerColor().
 + Изменен лимит размера партиклей с 3000 до 800.
-+ Пофикшены функции inflator, facePoser, facePoserScale, getfacePoserValue, eyePoser, fingerPoser, spectate, setNoTarget, ragdollGravity, explosion, shake.
++ Пофикшены некоторые функции в Tool.lua, diff.lua и health.lua.
 
 ## Авторы
 
