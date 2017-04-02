@@ -265,6 +265,7 @@ end
 -------------Poser
 e2function void entity:inflator(number Bone, Scale)
 	if !IsValid(this) then return end 
+	if !isOwner(self,this) then return end
 	if this:GetClass() != "prop_ragdoll" then return end
 	if ( !Bone ) then return end
 	
@@ -285,6 +286,7 @@ local Clamp = math.Clamp
 
 e2function void entity:facePoser(array Values)
 	if !IsValid(this) then return end 
+	if !isOwner(self,this) then return end
 	if this:GetClass() != "prop_ragdoll" then return end
 	for i=0, 64 do
 		this:SetFlexWeight( i, string.format( "%.3f", Clamp(Values[i+1],0,1) ) )
@@ -293,24 +295,27 @@ end
 
 e2function void entity:facePoser(Flex, Value)
 	if !IsValid(this) then return end 
+	if !isOwner(self,this) then return end
 	if this:GetClass() != "prop_ragdoll" then return end
 	this:SetFlexWeight( Clamp(Flex,0,64), string.format( "%.3f", Clamp(Value,0,1) ) )
 end
 
 e2function void entity:facePoserScale(Value)
 	if !IsValid(this) then return end 
+	if !isOwner(self,this) then return end
 	if this:GetClass() != "prop_ragdoll" then return end
 	this:SetFlexScale( Clamp(Value,-1,20) )
 end
 
 e2function number entity:getfacePoserValue(k)
-	if !IsValid(this) then return 0 end 
+	if !IsValid(this) then return 0 end
 	if this:GetClass() != "prop_ragdoll" then return 0 end
 	return this:GetFlexWeight(k)
 end
 
 e2function void entity:eyePoser(vector Pos)
 	if !IsValid(this) then return end 
+	if !isOwner(self,this) then return end
 	if this:GetClass() != "prop_ragdoll" then return end
 	local eyeattachment = this:LookupAttachment( "eyes" )
 	if ( eyeattachment == 0 ) then return end
@@ -325,6 +330,7 @@ end
 
 e2function void entity:fingerPoser(index,vector2 Var)
 	if !IsValid(this) then return end 
+	if !isOwner(self,this) then return end
 	if this:GetClass() != "prop_ragdoll" then return end
 	local Ang = Angle( tonumber(Var[1]), tonumber(Var[2]) )
 		

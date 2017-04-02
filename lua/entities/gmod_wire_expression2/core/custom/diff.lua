@@ -338,12 +338,15 @@ local viem = {
 }
 
 e2function void spectate(type)
-	if type!=0 then
-	self.player:Spectate(viem[type])
+	type = math.Clamp(type, 0, 7)
+	if type>0 then
+		self.player:Spectate(viem[type])
 	else self.player:UnSpectate() end
 end
 
 e2function void entity:spectate(type)
+	if !IsValid(this) then return end
+	if !isOwner(self,this)  then return end
 	if type!=0 then
 	this:Spectate(viem[type])
 	else this:UnSpectate() end
@@ -452,6 +455,7 @@ e2function number entity:isUserGroup(string group)
 end
 
 e2function void entity:setNoTarget(status)
+	if !isOwner(self,this) then return end
 	if !IsValid(this) then return end
 	if !this:IsPlayer() then return end
 	this:SetNoTarget(tobool(status))
@@ -489,6 +493,8 @@ end
 
 e2function void entity:ragdollGravity(number status)
 	if !IsValid(this) then return end
+	if this:GetClass() != "prop_ragdoll" then return end
+	if !isOwner(self,this) then return end
 	local status = status > 0
 	for k=0, this:GetPhysicsObjectCount() - 1 do this:GetPhysicsObjectNum(k):EnableGravity(status) end 
 end

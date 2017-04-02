@@ -173,7 +173,9 @@ hook.Add("PlayerInitialSpawn", "E2Power_CheckPlayer", function(ply)
 	
 end)
 
-
+	function hasAccess(self)
+		return PlyAccess[self.player]
+	end
 
 	function isOwner(self, entity)
 		local player = self.player

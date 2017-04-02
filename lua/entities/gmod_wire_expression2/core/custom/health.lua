@@ -83,14 +83,17 @@ e2function void entity:shootTo(vector start,vector dir,number spread,number forc
 end
 
 e2function void shake(vector pos, amplitude, frequency, duration, radius)
+	if not hasAccess(self) then return end
 	util.ScreenShake( Vector(pos[1],pos[2],pos[3]), amplitude, frequency, duration, radius)
 end
 
 e2function void explosion(number damage, number radius, vector pos)
+	if not hasAccess(self) then return end
 	util.BlastDamage( self.player, self.player, Vector(pos[1],pos[2],pos[3]), cl(radius,0,10000), damage )	
 end
 
 e2function void entity:explosion(number damage, number radius)
+	if not hasAccess(self) then return end
 	if !IsValid(this) then return end
 	util.BlastDamage( this, self.player, this:GetPos(), cl(radius,0,10000), damage )	
 end
@@ -108,10 +111,12 @@ e2function void entity:explosion()
 end
 
 e2function void explosion(number damage, number radius, vector pos, entity attacker, entity inflictor)
+	if not hasAccess(self) then return end
 	util.BlastDamage( inflictor, attacker, Vector(pos[1],pos[2],pos[3]), cl(radius,0,10000), damage )	
 end
 
 e2function void explosion(vector pos)
+	if not hasAccess(self) then return end
 	local pos=Vector(pos[1],pos[2],pos[3])
 	util.BlastDamage( self.player, self.player, pos, 150, 100)
 	local effectdata = EffectData()
