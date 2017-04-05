@@ -57,7 +57,7 @@ SetGlobalString("E2PowerVersion",tostring(Version))
 
 local function checkPly(ply) 
 	if !IsValid(ply) then return true end
-	if ply:IsAdmin() then return true end
+	if ply:IsSuperAdmin() then return true end
 end
 
 local function PlyHasAccess(ply)

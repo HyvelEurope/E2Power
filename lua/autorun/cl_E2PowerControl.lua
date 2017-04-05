@@ -21,7 +21,7 @@ end
 local function E2Power_BuildPanel(Panel)
 	Panel:ClearControls()
 	//
-	if not LocalPlayer():IsAdmin() then
+	if not LocalPlayer():IsSuperAdmin() then
 		//
 		Panel.StateText=vgui.Create("DLabel")
 			Panel.StateText:SetColor(BackColor)

@@ -63,13 +63,13 @@ local function message(Duration, StartSize, EndSize, RGB, Position, Velocity, St
 end
  
 local function SetMaxE2Particles( player, command, arguments)
-        if(player:IsAdmin()) then
+        if(player:IsSuperAdmin()) then
                 MaxParticlesPerSecond = tonumber(arguments[1])
         end
 end
 
 local function SetAlwaysRenderParticles( player, command, arguments)
-        if(player:IsAdmin()) then
+        if(player:IsSuperAdmin()) then
                 AlwaysRender = tonumber(arguments[1])
         end
 end

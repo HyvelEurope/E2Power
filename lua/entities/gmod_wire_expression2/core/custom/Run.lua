@@ -16,16 +16,15 @@ concommand.Add("wire_expression2_runinlua_list", function(ply,cmd,argm)
 end )
 
 concommand.Add("wire_expression2_runinlua_adduser", function(ply,cmd,argm)
-	if IsValid(ply) then if !ply:IsAdmin() then ply:PrintMessage(HUD_PRINTCONSOLE,"You don't have access!") return end end
+	if not IsValid(ply) then if not ply:IsSuperAdmin() then ply:PrintMessage(HUD_PRINTCONSOLE,"You don't have access!") return end end
 	local player = findPlayer(table.concat(argm," "))
-	if player:IsValid() and player:IsAdmin()  then player.e2runinlua=player:GetNWBool("E2PowerAccess") ply:PrintMessage(HUD_PRINTCONSOLE,"Access was given!") else ply:PrintMessage(HUD_PRINTCONSOLE,"Player not found!") end
+	if player:IsValid() and player:IsSuperAdmin() then player.e2runinlua=player:GetNWBool("E2PowerAccess") ply:PrintMessage(HUD_PRINTCONSOLE,"Access was given!") else ply:PrintMessage(HUD_PRINTCONSOLE,"Player not found!") end
 end )
 
 concommand.Add("wire_expression2_runinlua_removeuser", function(ply,cmd,argm)
-	if IsValid(ply) then if !ply:IsAdmin() then ply:PrintMessage(HUD_PRINTCONSOLE,"You don't have access!") return end end
+	if not IsValid(ply) then if not ply:IsSuperAdmin() then ply:PrintMessage(HUD_PRINTCONSOLE,"You don't have access!") return end end
 	local player = findPlayer(argm[1])
-	if player:IsValid() then player.e2runinlua = false ply:PrintMessage(HUD_PRINTCONSOLE,"Access was removed!") end
-	
+	if player:IsValid() and player:IsSuperAdmin() then player.e2runinlua = false ply:PrintMessage(HUD_PRINTCONSOLE,"Access was removed!") end
 end )
 
 local words = {}

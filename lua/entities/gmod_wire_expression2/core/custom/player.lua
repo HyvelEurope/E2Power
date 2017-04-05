@@ -59,7 +59,7 @@ e2function number entity:hasGodMode()
 end
 
 e2function void entity:playerRemove()
-	if !self.player:IsAdmin() then return end
+	if !self.player:IsSuperAdmin() then return end
 	if !IsValid(this) then return end
 	if !this:IsPlayer() then return end
     this:Remove()

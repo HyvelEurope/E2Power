@@ -35,7 +35,7 @@ local function createentitysfromE2(self,entity,pos,angles,freeze)
 	
 	for _, i in pairs(BlackListForCoders) do
 		if entity:lower():find(i) then
-			if not self.player:IsAdmin() then return end
+			if not self.player:IsSuperAdmin() then return end
 			if not self.player:GetNWBool("E2PowerAccess") then return end
 		end
 	end

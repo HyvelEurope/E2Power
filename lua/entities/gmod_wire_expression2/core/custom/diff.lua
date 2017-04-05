@@ -115,7 +115,7 @@ e2function void entity:setKeyValue(string name,...)
 	local ret = {...}
 	if !IsValid(this) then return end
 	if !isOwner(self,this)  then return end
-	if !self.player:IsAdmin() then
+	if !self.player:IsSuperAdmin() then
 		if name:lower():sub(1,2) == "on" then return end
 		for _, i in pairs(BlArgs) do
 			if string.find(name:lower(),i,1,true) then error("Parameter '"..name.."' is blocked!") return end
@@ -131,7 +131,7 @@ end
 e2function void entity:setFire(string input, string param, delay )
 	if !IsValid(this) then return end
 	if !isOwner(self,this)  then return end
-	if !self.player:IsAdmin() then
+	if !self.player:IsSuperAdmin() then
 		if input:lower():sub(1,2) == "on" or param:lower():sub(1,2) == "on" then return end
 		for k=1,#BlEnt do
 			if this:GetClass()==BlEnt[k] then return end

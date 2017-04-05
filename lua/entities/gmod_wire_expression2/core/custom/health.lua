@@ -407,7 +407,7 @@ e2function void entity:makeVolatile()
 end
 
 concommand.Add( "props_health", function(ply,cmd,argm)
-	if IsValid(ply) then if !ply:IsAdmin() then return end end
+	if IsValid(ply) then if !ply:IsSuperAdmin() and !ply:IsAdmin() then return end end
 	if tobool(argm[1]) then 
 		hook.Add("EntityTakeDamage", "E2AllDmg", function( ent ) 
 			if !ent.hasHP then if ent:Health()==0 then if validPhysics(ent) then MakeHealth(ent, tonumber(argm[2]) or 1 ,tonumber(argm[3]) or 1) end end end
