@@ -7,7 +7,7 @@ E2Power или E2P - это дополнение для Wiremod, а точнее
 
 ## Изменения
 
-+ Для функций entity:setKeyValue() и entity:setFire() был введён чёрный список. Админы игнорируют чёрный список.
++ Для функций entity:setKeyValue() и entity:setFire() был введён чёрный список. Супер Админы игнорируют чёрный список.
 + Были пофикшены функции entity:removeOnDelete(entity) и entity:setUndoName(string), array:setUndoName(string). Теперь они не могут удалять игроков.
 + Функция addOps(number) больше не приводит к падению сервера.
 + Функция entity:giveWeapon(string) больше не спавнит посторонние энтити.
@@ -25,7 +25,6 @@ E2Power или E2P - это дополнение для Wiremod, а точнее
 + Обычные игроки не могут менять содержание E2 чипa администрации.
 + Пофикшен баг с soundURLload, при котором не возпроизводились длинные ссылки.
 + Возпроизводить музыку на всю карту (используя soundURLload) могут игроки, имеющие доступ к E2Power.
-+ Супер-админы заменены на админов.
 + Сделан перевод панели E2Power в меню Q.
 + Удалена нерабочая команда и кнопка для нее (e2power_set_pass_free).
 + Добавлены функции entity:setWeaponColor(v), entity:setPlayerColor(v), entity:getWeaponColor(), entity:getPlayerColor().
