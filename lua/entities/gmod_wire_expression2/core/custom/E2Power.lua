@@ -85,14 +85,14 @@ local function GiveGroupAccess(group,who)
 	if group:len()<1 then return {false,0,"Group name is too short"} end 
 	for k=1,#GroupList do if GroupList[k]==group then return {false,0,"Group already added"} end end
 	
-	if !file.Exists( "E2Power/group.txt", "DATA" ) then 
-		file.Write( "E2Power/group.txt", group ) 
+	if !file.Exists( "e2power/group.txt", "DATA" ) then 
+		file.Write( "e2power/group.txt", group ) 
 	else
 		if #GroupList > 0 then 	
-			file.Append( "E2Power/group.txt", '\n'..group )
+			file.Append( "e2power/group.txt", '\n'..group )
 		else
-			file.Delete( "E2Power/group.txt")
-			file.Write( "E2Power/group.txt", group ) 
+			file.Delete( "e2power/group.txt")
+			file.Write( "e2power/group.txt", group ) 
 		end
 	end
 	
@@ -108,12 +108,12 @@ end
 local function RemoveGroupAccess(group,who)
 	if !checkPly(who) then return {false,0,"You don`t have access"} end
 	
-	if !file.Exists( "E2Power/group.txt", "DATA" ) then return {false,0,"Group not found"} end
+	if !file.Exists( "e2power/group.txt", "DATA" ) then return {false,0,"Group not found"} end
 	for k=1, #GroupList do
 		if GroupList[k]==group then 
 			table.remove(GroupList,k)			
-			file.Delete( "E2Power/group.txt")
-			file.Write( "E2Power/group.txt", table.concat(GroupList,'\n') )
+			file.Delete( "e2power/group.txt")
+			file.Write( "e2power/group.txt", table.concat(GroupList,'\n') )
 			
 			for _, ply in ipairs( player.GetAll()) do
 				if ply:IsUserGroup(qroup) then RemoveAccess(ply,who) end
@@ -149,13 +149,13 @@ local function ApplyGroupList()
 	end
 end
 
-if !file.IsDir( "E2Power", "DATA" ) then file.CreateDir( "E2Power" ) end
+if !file.IsDir( "e2power", "DATA" ) then file.CreateDir( "e2power" ) end
 
-if !file.Exists( "E2Power/group.txt", "DATA") then 
+if !file.Exists( "e2power/group.txt", "DATA") then 
 	GroupList={"admin","moder"}
-	file.Write( "E2Power/group.txt", table.concat(GroupList,'\n') ) 
+	file.Write( "e2power/group.txt", table.concat(GroupList,'\n') ) 
 else
-	GroupList=string.Explode('\n',file.Read( "E2Power/group.txt", "DATA" ))
+	GroupList=string.Explode('\n',file.Read( "e2power/group.txt", "DATA" ))
 	if GroupList[1]:len()==0 then GroupList={} end
 end
 
