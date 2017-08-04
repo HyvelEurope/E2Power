@@ -43,8 +43,9 @@ local function createentitysfromE2(self,entity,pos,angles,freeze)
 	for _, i in pairs(BlackListForPlayers) do
 		if entity:lower():find(i) and not self.player:GetNWBool("E2PowerAccess") then return end
 	end
-	
-	
+	if ( IsValid( self.player ) and !self.player:IsAdmin() ) then
+		if ( scripted_ents.GetMember( entity, "AdminOnly" ) ) then return end
+	end
 	
 	local ent = ents.Create(entity)
 	if not IsValid(ent) then return nil end
