@@ -219,7 +219,7 @@ end
 --
 
 e2function void soundURLPurge()
-	SoundURL("clr", self.entity,0)
+	SoundURL("cls", self.entity,0)
 end
 
 e2function void soundPlayAll(string path,volume,pitch)
