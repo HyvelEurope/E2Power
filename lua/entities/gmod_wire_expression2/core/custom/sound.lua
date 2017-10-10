@@ -1,5 +1,5 @@
 -- made by [G-moder]FertNoN
--- modified by [AI]Ubi
+-- modified by [AI]Ubi & Zimon4eR
  
 util.AddNetworkString('E2SoundSendURL')
 
@@ -234,4 +234,13 @@ e2function void soundPlayWorld(string path,vector pos,distance,pitch,volume)
 	if string.find(path:lower(),"loop",1,true) then return end
 	distance=math.Clamp(distance,20,140)
 	sound.Play(path,Vector(pos[1],pos[2],pos[3]),distance,pitch,volume)
+end
+
+__e2setcost(5)
+
+e2function void entity:soundPlaySingle(string path, number volume, number pitch)
+	if !IsValid(this) then return end
+	local path=path:Trim()
+	if string.find(path:lower(),"loop",1,true) then return end
+	this:EmitSound(path, 75, math.Clamp(pitch,0,255), math.Clamp(volume,0,127)/127, CHAN_AUTO)
 end

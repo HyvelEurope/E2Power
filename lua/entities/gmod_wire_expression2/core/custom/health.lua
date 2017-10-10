@@ -225,13 +225,13 @@ end
 local dmgType1 = nil
 
 __e2setcost(50)
-local function takeDmg(Ent, Amount, Type, Force, Attacker, Inflictor)
+local function takeDmg(Ent, Ply, Amount, Type, Force, Attacker, Inflictor)
 	local dmgInfo = DamageInfo()
 	dmgInfo:AddDamage(Amount)
 	dmgInfo:SetDamageType( dmgType[Type:lower()] or 0 )
-	dmgInfo:SetAttacker(Attacker or self.player)
-	dmgInfo:SetInflictor(Inflictor or self.player)
-	dmgInfo:SetDamageForce( Forse or Vector(0,0,0) )
+	dmgInfo:SetAttacker(Attacker or Ply)
+	dmgInfo:SetInflictor(Inflictor or Ply)
+	dmgInfo:SetDamageForce( Force or Vector(0,0,0) )
 	
 	Ent:TakeDamageInfo(dmgInfo)
 end
@@ -240,19 +240,19 @@ end
 e2function void entity:takeDamage(number Amount,string Type)
 	if !IsValid(this)  then return end
 	if !isOwner(self, this)  then return end
-	takeDmg(this,Amount,Type)
+	takeDmg(this, self.player, Amount, Type)
 end
 
 e2function void entity:takeDamage(number Amount, string Type, vector Force)
 	if !IsValid(this)  then return end
 	if !isOwner(self, this)  then return end
-	takeDmg(this,Amount,Type,Vector(Force[1],Force[2],Force[3]))
+	takeDmg(this, self.player, Amount, Type, Vector(Force[1],Force[2],Force[3]))
 end
 
 e2function void entity:takeDamage(number Amount, string Type, vector Force, entity Attacker, entity Inflictor)
 	if !IsValid(this)  then return end
 	if !isOwner(self, this)  then return end
-	takeDmg(this,Amount,Type,Vector(Force[1],Force[2],Force[3]),Attacker, Inflictor)
+	takeDmg(this, self.player, Amount, Type, Vector(Force[1],Force[2],Force[3]),Attacker, Inflictor)
 end
 
 e2function void entity:takeDamage(number Amount, entity Attacker, entity Inflictor)

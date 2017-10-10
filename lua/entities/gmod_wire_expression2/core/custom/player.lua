@@ -1,14 +1,17 @@
 -- made by [G-moder]FertNoN
--- edit by Zimon4eR (TheSlyFox)
+-- edit by Zimon4eR
 
-__e2setcost(100)
+__e2setcost(200)
 e2function void entity:setWeaponColor(vector rgb) -- Zimon4eR
 	if !IsValid(this)  then return end
 	if !this:IsPlayer() then return end
 	if !isOwner(self, this) then return end
 	local Vec = Vector(0,0,0)
+	rgb[1] = tostring(rgb[1]) != "nan" and rgb[1] or 0
 	Vec[1] = math.Clamp(rgb[1],0,255)/255
+	rgb[2] = tostring(rgb[2]) != "nan" and rgb[2] or 0
 	Vec[2] = math.Clamp(rgb[2],0,255)/255
+	rgb[3] = tostring(rgb[3]) != "nan" and rgb[3] or 0
 	Vec[3] = math.Clamp(rgb[3],0,255)/255
 	this:SetWeaponColor(Vec)
 end
@@ -18,8 +21,11 @@ e2function void entity:setPlayerColor(vector rgb) -- Zimon4eR
 	if !this:IsPlayer() then return end
 	if !isOwner(self, this) then return end
 	local Vec = Vector(0,0,0)
+	rgb[1] = tostring(rgb[1]) != "nan" and rgb[1] or 0
 	Vec[1] = math.Clamp(rgb[1],0,255)/255
+	rgb[2] = tostring(rgb[2]) != "nan" and rgb[2] or 0
 	Vec[2] = math.Clamp(rgb[2],0,255)/255
+	rgb[3] = tostring(rgb[3]) != "nan" and rgb[3] or 0
 	Vec[3] = math.Clamp(rgb[3],0,255)/255
 	this:SetPlayerColor(Vec)
 end
@@ -55,7 +61,7 @@ end
 e2function number entity:hasGodMode()
 	if !IsValid(this) then return 0 end
 	if !this:IsPlayer() then return 0 end
-	return tonumber(this:HasGodMode())
+	return this:HasGodMode() and 1 or 0
 end
 
 e2function void entity:playerRemove()
@@ -87,7 +93,7 @@ end
 e2function number entity:playerIsRagdoll()
 	if !IsValid(this) then return 0 end
 	if !this:IsPlayer() then return 0 end
-	if IsValid(this.ragdoll) then return 1 else return 0 end
+	return IsValid(this.ragdoll) ? 1 or 0
 end
 
 __e2setcost(100)

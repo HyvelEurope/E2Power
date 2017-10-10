@@ -44,7 +44,9 @@ local function createentitysfromE2(self,entity,pos,angles,freeze)
 		if entity:lower():find(i) and not self.player:GetNWBool("E2PowerAccess") then return end
 	end
 	
-	
+	if ( IsValid( self.player ) && !self.player:IsAdmin() ) then -- Проверка на права админа, при спавне некоторых entity.
+		if ( scripted_ents.GetMember( entity, "AdminOnly" ) ) then return end
+	end
 	
 	local ent = ents.Create(entity)
 	if not IsValid(ent) then return nil end
@@ -63,12 +65,6 @@ local function createentitysfromE2(self,entity,pos,angles,freeze)
 		phys:Wake()
 		if freeze then phys:EnableMotion( false ) end
 	end
-	--ent.OnDieFunctions.GetCountUpdate.Function2 = ent.OnDieFunctions.GetCountUpdate.Function
-	--ent.OnDieFunctions.GetCountUpdate.Function =  function(self,player,class)
-	--	if CLIENT then return end
-	--	E2totalspawnedentitys=E2totalspawnedentitys-1
-	--	self.OnDieFunctions.GetCountUpdate.Function2(self,player,class)
-	--end
 	E2totalspawnedentitys = E2totalspawnedentitys+1
 	E2tempSpawnedEntitys = E2tempSpawnedEntitys+1
 	if E2tempSpawnedEntitys==1 then
