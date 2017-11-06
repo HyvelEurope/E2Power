@@ -93,14 +93,14 @@ end
 e2function number entity:playerIsRagdoll()
 	if !IsValid(this) then return 0 end
 	if !this:IsPlayer() then return 0 end
-	return IsValid(this.ragdoll) ? 1 or 0
+	return IsValid(this.ragdoll) and 1 or 0
 end
 
 __e2setcost(100)
 e2function void entity:playerModel(string model)
 	if !IsValid(this) then return end
 	if !isOwner(self, this) then return end
-	if !this:IsPlayer() then return end 
+	if !this:IsPlayer() then return end
 	local modelname = player_manager.TranslatePlayerModel( model )
 	util.PrecacheModel( modelname )
 	this:SetModel( modelname )
