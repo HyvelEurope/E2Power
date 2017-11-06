@@ -97,7 +97,7 @@ end
 e2function number entity:playerIsRagdoll()
 	if !IsValid(this) then return 0 end
 	if !this:IsPlayer() then return 0 end
-	return IsValid(this.ragdoll) ? 1 or 0
+	return IsValid(this.ragdoll) and 1 or 0
 end
 
 __e2setcost(100)
