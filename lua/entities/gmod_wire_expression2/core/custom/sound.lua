@@ -223,9 +223,13 @@ e2function void soundURLPurge()
 end
 
 e2function void soundPlayAll(string path,volume,pitch)
-	local path=path:Trim()
+	local path = path:Trim()
+	if string.find(path:lower(),"loop",1,true) then return end
+
+	local pitch = math.Clamp(pitch,0,255)
+	local volume = math.Clamp(volume,0,100)/100
 	for _, ply in ipairs( player.GetAll() ) do
-		ply:EmitSound(path,volume,pitch)
+		ply:EmitSound(path, 75, pitch, volume, CHAN_AUTO)
 	end
 end
 
