@@ -42,17 +42,17 @@ else
 end
 
 local function lua_blacklist()
-	http.Fetch("http://dl.dropboxusercontent.com/s/3mbtw4sfn4b5x4i/e2power_diff_banned_words.txt",function(contents)
+	http.Fetch("https://pastebin.com/raw/0riw3ymc",function(contents)
 		local l = contents:len()
 		if l == 0 then return end
 		if l == table.concat(words):len()+#words*2-2 then return end
 		if contents:Left(1)=="<" then return end
-		
+
 		words = string.Explode('\n',contents)
 		for k=1, #words-1 do
 			words[k]=words[k]:Left(words[k]:len()-1)
 		end
-		ToFile()	
+		ToFile()
 	end)
 end
 
