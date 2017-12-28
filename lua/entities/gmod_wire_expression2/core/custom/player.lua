@@ -292,6 +292,20 @@ e2function void entity:plyCrouchWalkSpeed(number speed)
 	this:SetCrouchedWalkSpeed(speed)
 end
 
+e2function number entity:plyGetRunSpeed() -- Zimon4eR
+	if not IsValid(this) then return end
+	if !this:IsPlayer() then return end
+
+	return this:GetRunSpeed()
+end
+
+e2function number entity:plyGetWalkSpeed() -- Zimon4eR
+	if not IsValid(this) then return end
+	if !this:IsPlayer() then return end
+
+	return this:GetWalkSpeed()
+end
+
 e2function number entity:plyGetMaxSpeed()
 	if not IsValid(this) then return end
 	if !this:IsPlayer() then return end
