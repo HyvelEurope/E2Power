@@ -87,7 +87,20 @@ e2function void entity:playerNoclip(status)
 	if !IsValid(this) then return end
 	if !isOwner(self, this) then return end
 	if !this:IsPlayer() then return end
-	if status!=0 then
+
+	if tobool(status) then // Some reason just "status" does not work so i just will convert it to bool..
+		this:SetMoveType( MOVETYPE_NOCLIP )
+	else
+		this:SetMoveType( MOVETYPE_WALK )
+	end
+end
+
+e2function void entity:playerNoclipToggle() -- Zimon4eR
+	if !IsValid(this) then return end
+	if !isOwner(self, this) then return end
+	if !this:IsPlayer() then return end
+
+	if this:GetMoveType() ~= MOVETYPE_NOCLIP then
 		this:SetMoveType( MOVETYPE_NOCLIP )
 	else
 		this:SetMoveType( MOVETYPE_WALK )
