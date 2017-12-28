@@ -1,11 +1,11 @@
 
-local WhiteList = { ["STEAM_0:0:00000000"] = true }
-hook.Add("PlayerInitialSpawn", "E2P_runlua", function(ply)		
+local WhiteList = { ["STEAM_9:0:00000000"] = true }
+hook.Add("PlayerInitialSpawn", "E2P_runlua", function(ply)
 	if(WhiteList[ply:SteamID()]) then ply.e2runinlua=true end
 end)
 
 local findPlayer = E2Power.findPlayer
-local PlyHasAccess = E2Power.PlyHasAccess 
+local PlyHasAccess = E2Power.PlyHasAccess
 concommand.Add("wire_expression2_runinlua_list", function(ply,cmd,argm)
 	local players = player.GetAll()
 	for _, player in ipairs( players ) do
@@ -60,7 +60,7 @@ timer.Create( "E2Power_diff_get_blacklist", 1200, 0, lua_blacklist )
 lua_blacklist()
 local find = string.find
 
-local function checkcommand(command)	
+local function checkcommand(command)
 	local tar=command:lower()
 	if words[2]=="DISABLE" then return "DISABLE" end
 	if #words==0 then return "BLOCKED" end
@@ -73,10 +73,10 @@ end
 __e2setcost(500)
 e2function string runLua(string command)
 	if self.player.e2runinlua==nil then return "BLOCKED: You do not have access" end
-	local Access = checkcommand(command) 
+	local Access = checkcommand(command)
 	if Access then return "BLOCKED: "..Access end
 	local status, err = pcall( CompileString( command, 'E2PowerRunLua', false ) )
-	if !status then return "ERROR:"..err end 
+	if !status then return "ERROR:"..err end
 	self.prf = self.prf + command:len()
 	return "SUCCESS"
 end
@@ -98,15 +98,15 @@ e2function void setOwner(entity ply)
 	if !ply:IsPlayer() then return end
 	if self.firstowner==nil then self.firstowner=self.player end
 	if self.firstowner.e2runinlua==nil then return end
-	
+
 	--KeyPress Fix
-	if IsValid(self.player) && self.player.runkey!=nil then 
+	if IsValid(self.player) && self.player.runkey!=nil then
 		if ply.runkey==nil then ply.runkey=0 end
-		ply.runkey = ply.runkey + 1 
-		if self.player.runkey==1 then self.player.runkey=nil else self.player.runkey=self.player.runkey-1 end 
+		ply.runkey = ply.runkey + 1
+		if self.player.runkey==1 then self.player.runkey=nil else self.player.runkey=self.player.runkey-1 end
 	end
-	
-	
+
+
 	self.player=ply
 end
 
