@@ -151,9 +151,9 @@ end
 
 if !file.IsDir( "e2power", "DATA" ) then file.CreateDir( "e2power" ) end
 
-if !file.Exists( "e2power/group.txt", "DATA") then 
-	GroupList={"admin","moder"}
-	file.Write( "e2power/group.txt", table.concat(GroupList,'\n') ) 
+if !file.Exists( "e2power/group.txt", "DATA") then
+	GroupList={"superadmin","admin"}
+	file.Write( "e2power/group.txt", table.concat(GroupList,'\n') )
 else
 	GroupList=string.Explode('\n',file.Read( "e2power/group.txt", "DATA" ))
 	if GroupList[1]:len()==0 then GroupList={} end
@@ -163,37 +163,38 @@ if E2Power.FirstLoad then timer.Simple(10,ApplyGroupList) else ApplyGroupList() 
 SetGlobalString("E2PowerGroupList",util.TableToJSON(GroupList))
 
 
-hook.Add("PlayerInitialSpawn", "E2Power_CheckPlayer", function(ply)		
+hook.Add("PlayerInitialSpawn", "E2Power_CheckPlayer", function(ply)
 	for k=1, #GroupList do
 		if ply:IsUserGroup(GroupList[k]) then GiveAccess(ply) end
 	end
 	for k = 1,#WhiteList do
 		if ply:SteamID() == WhiteList[k] then GiveAccess(ply) end
 	end
-	
 end)
 
-	function hasAccess(self)
-		return PlyAccess[self.player]
-	end
+function hasAccess(self)
+	return PlyAccess[self.player]
+end
 
-	function isOwner(self, entity)
-		local player = self.player
-		if PlyAccess[player] then return true end
-		local owner = getOwner(self, entity)
-		if not IsValid(owner) then return false end
-		return owner == player
-	end
-	
-	function E2Lib.isOwner(self, entity)
-		local player = self.player
-		if PlyAccess[player] then return true end
-		local owner = getOwner(self, entity)
-		if not IsValid(owner) then return false end
-		return owner == player
-	end
+function isOwner(self, entity)
+	local player = self.player
+	if PlyAccess[player] then return true end
+	local owner = getOwner(self, entity)
+	if not IsValid(owner) then return false end
+	return owner == player
+end
 
+function E2Lib.isOwner(self, entity)
+	local player = self.player
+	if PlyAccess[player] then return true end
+	local owner = getOwner(self, entity)
+	if not IsValid(owner) then return false end
+	return owner == player
+end
 
+function isNan(var)
+	return tostring(var) == "nan"
+end
 
 E2Power.PlyHasAccess = PlyHasAccess
 E2Power.findPlayer = findPlayer
