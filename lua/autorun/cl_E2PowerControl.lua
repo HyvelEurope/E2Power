@@ -1,6 +1,6 @@
 /// E2Power Control Menu
 /// Made by SkyAngeLoL
-/// 
+///
 if SERVER then return end
 ///
 local BackColor=Color(0,170,150,255)
@@ -107,12 +107,12 @@ local function E2Power_BuildPanel(Panel)
 			local Stat=tobool(line:GetValue(2))
 			local ContMenu=DermaMenu()
 				if not Stat then
-					ContMenu:AddOption("Выдать доступ",function()  
+					ContMenu:AddOption("Выдать доступ",function()
 						RunConsoleCommand('e2power_give_access',Pl)
 						timer.Simple(0.2,function() Panel.PlyList.LoadPlyList() end)
 					end)
 				else
-					ContMenu:AddOption("Отнять доступ",function()  
+					ContMenu:AddOption("Отнять доступ",function()
 						RunConsoleCommand('e2power_remove_access',Pl)
 						timer.Simple(0.2,function() Panel.PlyList.LoadPlyList() end)
 					end)
@@ -215,10 +215,10 @@ local function E2Power_BuildPanel(Panel)
 		Panel.GroupList.OnClickLine=function(parent,line,isselected)
 			local Group=line:GetValue(1)
 			local ContMenu=DermaMenu()
-				ContMenu:AddOption("Удалить группу",function()  
+				ContMenu:AddOption("Удалить группу",function()
 					RunConsoleCommand('e2power_remove_access_group',Group)
-					timer.Simple(0.2,function() 
-						Panel.GroupList.LoadGroupList() 
+					timer.Simple(0.2,function()
+						Panel.GroupList.LoadGroupList()
 						Panel.PlyList.LoadPlyList()
 					end)
 				end)
@@ -241,7 +241,7 @@ local function E2Power_BuildPanel(Panel)
 			if NewName!="Enter new group name" then
 				RunConsoleCommand("e2power_give_access_group",NewName)
 				Panel.GroupBox:SetText("Enter new group name")
-				timer.Simple(0.2,function() 
+				timer.Simple(0.2,function()
 					Panel.GroupList.LoadGroupList()
 					Panel.PlyList.LoadPlyList()
 				end)
@@ -283,7 +283,7 @@ local function E2Power_BuildPanel(Panel)
 	Panel.VersionText=vgui.Create("DLabel")
 		Panel.VersionText:SetColor(BackColor)
 		Panel.VersionText:SetFont("SkyDermaArial_I_17")
-		Panel.VersionText:SetText(" FertNoN - E2Power\n SkyAngeLoL - меню\n Tengz - перевод и доработка\n Zimon4eR - дополнение и доработка")
+		Panel.VersionText:SetText(" FertNoN - склеил чужие аддоны\n SkyAngeLoL - меню\n Tengz - перевод и доработка\n Zimon4eR - дополнение и доработка")
 		Panel.VersionText:SizeToContents()
 	Panel:AddItem(Panel.VersionText)
 	////////
@@ -303,7 +303,7 @@ hook.Add("SpawnMenuOpen","E2Power_SpawnMenuOpen",E2Power_SMO)
 hook.Add("PopulateToolMenu","E2Power_PopulateToolMenu",function()
 	spawnmenu.AddToolMenuOption("Utilities","E2Power","Menu","E2Power","","",E2Power_BuildPanel)
 end)
-/// ULX Integr 
+/// ULX Integr
 /// Don't remove this if you not use ULX !
 for name,data in pairs(hook.GetTable()) do
 	if name=="UCLChanged" then
