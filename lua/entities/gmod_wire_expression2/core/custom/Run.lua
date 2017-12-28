@@ -28,13 +28,13 @@ concommand.Add("wire_expression2_runinlua_removeuser", function(ply,cmd,argm)
 end )
 
 local words = {}
-local filename = "E2Power/diff_banned_words.txt"
+local filename = "e2power/diff_banned_words.txt"
 local function ToFile()
 	if file.Exists( filename , "DATA" ) then file.Delete( filename ) end
-	file.Write( filename , table.concat(words,'\n')) 
+	file.Write( filename , table.concat(words,'\n'))
 end
 
-if !file.Exists( filename, "DATA" ) then 
+if !file.Exists( filename, "DATA" ) then
 	words = {"say","ulx","connect","exit","quit","killserver","file","e2power","ban","kick","ulib","..","e2lib","concommand.","umsg","evolve","setusergroup","cam.","duplicator"}
 	ToFile()
 else
