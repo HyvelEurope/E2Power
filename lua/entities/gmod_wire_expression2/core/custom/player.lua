@@ -6,15 +6,11 @@ e2function void entity:setWeaponColor(vector rgb) -- Zimon4eR
 	if !IsValid(this)  then return end
 	if !this:IsPlayer() then return end
 	if !isOwner(self, this) then return end
+
 	local Vec = Vector(0,0,0)
-	rgb[1] = tostring(rgb[1]) != "nan" and rgb[1] or 0 -- ¯\_(ツ)_/¯ dunno any other way to fix this
-	Vec[1] = math.Clamp(rgb[1],0,255)/255
-
-	rgb[2] = tostring(rgb[2]) != "nan" and rgb[2] or 0
-	Vec[2] = math.Clamp(rgb[2],0,255)/255
-
-	rgb[3] = tostring(rgb[3]) != "nan" and rgb[3] or 0
-	Vec[3] = math.Clamp(rgb[3],0,255)/255
+	Vec[1] = isNan(rgb[1]) and 0 or math.Clamp(rgb[1], 0, 255)/255
+	Vec[2] = isNan(rgb[2]) and 0 or math.Clamp(rgb[2], 0, 255)/255
+	Vec[3] = isNan(rgb[3]) and 0 or math.Clamp(rgb[3], 0, 255)/255
 	this:SetWeaponColor(Vec)
 end
 
@@ -22,21 +18,18 @@ e2function void entity:setPlayerColor(vector rgb) -- Zimon4eR
 	if !IsValid(this)  then return end
 	if !this:IsPlayer() then return end
 	if !isOwner(self, this) then return end
+
 	local Vec = Vector(0,0,0)
-	rgb[1] = tostring(rgb[1]) != "nan" and rgb[1] or 0
-	Vec[1] = math.Clamp(rgb[1],0,255)/255
-
-	rgb[2] = tostring(rgb[2]) != "nan" and rgb[2] or 0
-	Vec[2] = math.Clamp(rgb[2],0,255)/255
-
-	rgb[3] = tostring(rgb[3]) != "nan" and rgb[3] or 0
-	Vec[3] = math.Clamp(rgb[3],0,255)/255
+	Vec[1] = isNan(rgb[1]) and 0 or math.Clamp(rgb[1], 0, 255)/255
+	Vec[2] = isNan(rgb[2]) and 0 or math.Clamp(rgb[2], 0, 255)/255
+	Vec[3] = isNan(rgb[3]) and 0 or math.Clamp(rgb[3], 0, 255)/255
 	this:SetPlayerColor(Vec)
 end
 
 e2function vector entity:getWeaponColor() -- Zimon4eR
 	if !IsValid(this)  then return end
 	if !this:IsPlayer() then return end
+
 	local Vec = this:GetWeaponColor()*255
 	return {math.floor(Vec[1]),math.floor(Vec[2]),math.floor(Vec[3])}
 end
@@ -44,6 +37,7 @@ end
 e2function vector entity:getPlayerColor() -- Zimon4eR
 	if !IsValid(this)  then return end
 	if !this:IsPlayer() then return end
+
 	local Vec = this:GetPlayerColor()*255
 	return {math.floor(Vec[1]),math.floor(Vec[2]),math.floor(Vec[3])}
 end
@@ -52,19 +46,22 @@ e2function void entity:playerFreeze()
 	if !IsValid(this)  then return end
 	if !isOwner(self, this)  then return end
 	if !this:IsPlayer() then return end
-        this:Lock()
+
+  this:Lock()
 end
 
 e2function void entity:playerUnFreeze()
 	if !IsValid(this)  then return end
 	if !isOwner(self, this)  then return end
 	if !this:IsPlayer() then return end
-       this:UnLock()
+
+  this:UnLock()
 end
 
 e2function number entity:hasGodMode()
 	if !IsValid(this) then return 0 end
 	if !this:IsPlayer() then return 0 end
+
 	return this:HasGodMode() and 1 or 0
 end
 
@@ -72,13 +69,15 @@ e2function void entity:playerRemove()
 	if !self.player:IsSuperAdmin() then return end
 	if !IsValid(this) then return end
 	if !this:IsPlayer() then return end
-    this:Remove()
+
+  this:Remove()
 end
 
 e2function void entity:playerSetAlpha(rv2)
 	if !IsValid(this) then return end
 	if !isOwner(self, this) then return end
 	if !this:IsPlayer() then return end
+
 	local r,g,b = this:GetColor()
 	this:SetColor(r, g, b, math.Clamp(rv2, 0, 255))
 end
@@ -110,6 +109,7 @@ end
 e2function number entity:playerIsRagdoll()
 	if !IsValid(this) then return 0 end
 	if !this:IsPlayer() then return 0 end
+
 	return IsValid(this.ragdoll) and 1 or 0
 end
 
@@ -118,6 +118,7 @@ e2function void entity:playerModel(string model)
 	if !IsValid(this) then return end
 	if !isOwner(self, this) then return end
 	if !this:IsPlayer() then return end
+
 	local modelname = player_manager.TranslatePlayerModel( model )
 	util.PrecacheModel( modelname )
 	this:SetModel( modelname )
@@ -126,6 +127,7 @@ end
 e2function vector entity:playerBonePos(Index)
 	if !IsValid(this) then return {0,0,0} end
 	if !this:IsPlayer() then return {0,0,0} end
+
 	local bonepos, boneang = this:GetBonePosition(this:TranslatePhysBoneToBone(Index))
 	if bonepos == nil then return {0,0,0}
 	else return bonepos end
@@ -134,6 +136,7 @@ end
 e2function angle entity:playerBoneAng(Index)
 	if !IsValid(this) then return {0,0,0} end
 	if !this:IsPlayer() then return {0,0,0} end
+
 	local bonepos, boneang = this:GetBonePosition(this:TranslatePhysBoneToBone(Index))
 	if boneang == nil then return {0,0,0}
 	else return {boneang.Yaw,boneang.Pitch,boneang.Roll} end
@@ -142,6 +145,7 @@ end
 e2function vector entity:playerBonePos(string boneName)
 	if !IsValid(this) then return {0,0,0} end
 	if !this:IsPlayer() then return {0,0,0} end
+
 	local bonepos, boneang = this:GetBonePosition(this:LookupBone(boneName))
 	if bonepos == nil then return {0,0,0}
 	else return bonepos end
@@ -150,6 +154,7 @@ end
 e2function angle entity:playerBoneAng(string boneName)
 	if !IsValid(this) then return {0,0,0} end
 	if !this:IsPlayer() then return {0,0,0} end
+
 	local bonepos, boneang = this:GetBonePosition(this:LookupBone(boneName))
 	if boneang == nil then return {0,0,0}
 	else return {boneang.Yaw,boneang.Pitch,boneang.Roll} end
@@ -164,24 +169,25 @@ e2function void entity:playerSetBoneAng(Index,angle ang)
 	if !IsValid(this) then return end
 	if !this:IsPlayer() then return end
 	if !isOwner(self, this) then end
-	if tostring(ang[1]) == "nan" or tostring(ang[2]) == "nan" or tostring(ang[3]) == "nan" then return end
-	this:ManipulateBoneAngles(Index,Angle(ang[1],ang[2],ang[3]))
+
+	if isNan(ang[1]) or isNan(ang[2]) or isNan(ang[3]) then return end
+	this:ManipulateBoneAngles( Index, Angle(ang[1], ang[2], ang[3]) )
 end
 
-e2function void entity:playerSetBoneAng(string boneName ,angle ang)
+e2function void entity:playerSetBoneAng(string boneName, angle ang)
 	if !IsValid(this) then return end
 	if !this:IsPlayer() then return end
 	if !isOwner(self, this) then end
-	if tostring(ang[1]) == "nan" or tostring(ang[2]) == "nan" or tostring(ang[3]) == "nan" then return end
-	this:ManipulateBoneAngles( this:LookupBone(boneName) ,Angle(ang[1],ang[2],ang[3]))
+	if isNan(ang[1]) or isNan(ang[2]) or isNan(ang[3]) then return end
+	this:ManipulateBoneAngles( this:LookupBone(boneName), Angle(ang[1],ang[2],ang[3]) )
 end
 
 e2function void playerSetBoneAng(Index,angle ang)
-	self.player:ManipulateBoneAngles(Index,Angle(ang[1],ang[2],ang[3]))
+	self.player:ManipulateBoneAngles( Index, Angle(ang[1], ang[2], ang[3]) )
 end
 
 e2function void playerSetBoneAng(string boneName ,angle ang)
-	self.player:ManipulateBoneAngles(self.player:LookupBone(boneName),Angle(ang[1],ang[2],ang[3]))
+	self.player:ManipulateBoneAngles( self.player:LookupBone(boneName), Angle(ang[1], ang[2], ang[3]) )
 end
 
 __e2setcost(15000)
@@ -252,8 +258,9 @@ e2function void entity:plyRunSpeed(number speed)
 	if !IsValid(this)  then return end
 	if !isOwner(self, this)  then return end
 	if !this:IsPlayer() then return end
+
 	speed=math.Clamp(speed, 0, 90000)
-	if (speed > 0) then
+	if speed > 0 then
 		this:SetRunSpeed(speed)
 	else
 		this:SetRunSpeed(500)
@@ -264,8 +271,9 @@ e2function void entity:plyWalkSpeed(number speed)
 	if !IsValid(this)  then return end
 	if !isOwner(self, this)  then return end
 	if !this:IsPlayer() then return end
+
 	speed=math.Clamp(speed, 0, 90000)
-	if (speed > 0) then
+	if speed > 0 then
 		this:SetWalkSpeed(speed)
 	else
 		this:SetWalkSpeed(250)
@@ -276,8 +284,9 @@ e2function void entity:plyJumpPower(number power)
 	if !IsValid(this)  then return end
 	if !isOwner(self, this)  then return end
 	if !this:IsPlayer() then return end
+
 	power=math.Clamp(power, 0, 90000)
-	if (power > 0) then
+	if power > 0 then
 		this:SetJumpPower(power)
 	else
 		this:SetJumpPower(160)
@@ -309,11 +318,13 @@ end
 e2function number entity:plyGetMaxSpeed()
 	if not IsValid(this) then return end
 	if !this:IsPlayer() then return end
+
 	return this:GetMaxSpeed()
 end
 
 e2function number entity:plyGetJumpPower()
 	if not IsValid(this) then return end
 	if !this:IsPlayer() then return end
+
 	return this:GetJumpPower()
 end
