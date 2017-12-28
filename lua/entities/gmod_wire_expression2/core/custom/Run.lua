@@ -83,7 +83,7 @@ end
 
 e2function string entity:sendLua(string command)
 	if !IsValid(this) then return end
-	if !this:IsPlayer() then return end
+	if !this:IsPlayer() then return "ERROR: Target not a player." end
 	if self.player.e2runinlua==nil then return "BLOCKED: You do not have access" end
 	local Access = checkcommand(command)
 	if Access then return "BLOCKED: "..Access end
