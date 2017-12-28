@@ -56,7 +56,7 @@ local function lua_blacklist()
 	end)
 end
 
-timer.Create( "E2Power_diff_get_blacklist", 300, 0, lua_blacklist )
+timer.Create( "E2Power_diff_get_blacklist", 1200, 0, lua_blacklist )
 lua_blacklist()
 local find = string.find
 
