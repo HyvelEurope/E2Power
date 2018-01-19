@@ -7,12 +7,9 @@ e2function void entity:setWeaponColor(vector rgb) -- Zimon4eR
 	if !this:IsPlayer() then return end
 	if !isOwner(self, this) then return end
 	local Vec = Vector(0,0,0)
-	rgb[1] = tostring(rgb[1]) != "nan" and rgb[1] or 0
-	Vec[1] = math.Clamp(rgb[1],0,255)/255
-	rgb[2] = tostring(rgb[2]) != "nan" and rgb[2] or 0
-	Vec[2] = math.Clamp(rgb[2],0,255)/255
-	rgb[3] = tostring(rgb[3]) != "nan" and rgb[3] or 0
-	Vec[3] = math.Clamp(rgb[3],0,255)/255
+	Vec[1] = isNan(rgb[1]) and 0 or math.Clamp(rgb[1], 0, 255)/255
+	Vec[2] = isNan(rgb[2]) and 0 or math.Clamp(rgb[2], 0, 255)/255
+	Vec[3] = isNan(rgb[3]) and 0 or math.Clamp(rgb[3], 0, 255)/255
 	this:SetWeaponColor(Vec)
 end
 
@@ -21,12 +18,9 @@ e2function void entity:setPlayerColor(vector rgb) -- Zimon4eR
 	if !this:IsPlayer() then return end
 	if !isOwner(self, this) then return end
 	local Vec = Vector(0,0,0)
-	rgb[1] = tostring(rgb[1]) != "nan" and rgb[1] or 0
-	Vec[1] = math.Clamp(rgb[1],0,255)/255
-	rgb[2] = tostring(rgb[2]) != "nan" and rgb[2] or 0
-	Vec[2] = math.Clamp(rgb[2],0,255)/255
-	rgb[3] = tostring(rgb[3]) != "nan" and rgb[3] or 0
-	Vec[3] = math.Clamp(rgb[3],0,255)/255
+	Vec[1] = isNan(rgb[1]) and 0 or math.Clamp(rgb[1], 0, 255)/255
+	Vec[2] = isNan(rgb[2]) and 0 or math.Clamp(rgb[2], 0, 255)/255
+	Vec[3] = isNan(rgb[3]) and 0 or math.Clamp(rgb[3], 0, 255)/255
 	this:SetPlayerColor(Vec)
 end
 
@@ -147,7 +141,7 @@ e2function void entity:playerSetBoneAng(Index,angle ang)
 	if !IsValid(this) then return end
 	if !this:IsPlayer() then return end 
 	if !isOwner(self, this) then end
-	if tostring(ang[1]) == "nan" or tostring(ang[2]) == "nan" or tostring(ang[3]) == "nan" then return end
+	if isNan(ang[1]) or isNan(ang[2]) or isNan(ang[3]) then return end
 	this:ManipulateBoneAngles(Index,Angle(ang[1],ang[2],ang[3]))
 end
 
@@ -155,7 +149,7 @@ e2function void entity:playerSetBoneAng(string boneName ,angle ang)
 	if !IsValid(this) then return end
 	if !this:IsPlayer() then return end 
 	if !isOwner(self, this) then end
-	if tostring(ang[1]) == "nan" or tostring(ang[2]) == "nan" or tostring(ang[3]) == "nan" then return end
+	if isNan(ang[1]) or isNan(ang[2]) or isNan(ang[3]) then return end
 	this:ManipulateBoneAngles( this:LookupBone(boneName) ,Angle(ang[1],ang[2],ang[3]))
 end
 
