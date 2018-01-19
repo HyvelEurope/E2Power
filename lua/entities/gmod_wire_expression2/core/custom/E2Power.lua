@@ -173,28 +173,28 @@ hook.Add("PlayerInitialSpawn", "E2Power_CheckPlayer", function(ply)
 	
 end)
 
-	function hasAccess(self)
-		return PlyAccess[self.player]
-	end
+function hasAccess(self)
+	return PlyAccess[self.player]
+end
 
-	function isOwner(self, entity)
-		local player = self.player
-		if PlyAccess[player] then return true end
-		local owner = getOwner(self, entity)
-		if not IsValid(owner) then return false end
-		return owner == player
-	end
+function isOwner(self, entity)
+	local player = self.player
+	if PlyAccess[player] then return true end
+	local owner = getOwner(self, entity)
+	if not IsValid(owner) then return false end
+	return owner == player
+end
 	
-	function E2Lib.isOwner(self, entity)
-		local player = self.player
-		if PlyAccess[player] then return true end
-		local owner = getOwner(self, entity)
-		if not IsValid(owner) then return false end
-		return owner == player
-	end
-
-
-
+function E2Lib.isOwner(self, entity)
+	local player = self.player
+	if PlyAccess[player] then return true end
+	local owner = getOwner(self, entity)
+	if not IsValid(owner) then return false end
+	return owner == player
+end
+function isNan(var)
+	return tostring(var) == "nan"
+end	
 E2Power.PlyHasAccess = PlyHasAccess
 E2Power.findPlayer = findPlayer
 ------------------------------------------------------------CONSOLE COMMAND
