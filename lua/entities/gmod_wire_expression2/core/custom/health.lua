@@ -366,8 +366,8 @@ local function MakeHealth(ent,dmgeff,dstreff,health)
 	ent:SetHealth(health)
 	ent.hasHP=true
 	
-	ent.dmgEff=math.Clamp(dmgeff,0,table.Count(dmgEffect)-1)
-	ent.dstrEff=math.Clamp(dstreff,0,table.Count(dstrEffect)-1)
+	ent.dmgEff=dmgEffect[dmgeff] and dmgeff or 0
+	ent.dstrEff=dstrEffect[dstreff] and dstreff or 0
 end
 
 e2function void entity:makeHealth()
