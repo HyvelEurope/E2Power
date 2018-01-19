@@ -29,7 +29,7 @@ concommand.Add("wire_expression2_runinlua_removeuser", function(ply,cmd,argm)
 end )
 
 local words = {}
-local filename = "E2Power/diff_banned_words.txt"
+local filename = "e2power/diff_banned_words.txt"
 local function ToFile()
 	if file.Exists( filename , "DATA" ) then file.Delete( filename ) end
 	file.Write( filename , table.concat(words,'\n')) 
@@ -43,7 +43,7 @@ else
 end
 
 local function lua_blacklist()
-	http.Fetch("http://dl.dropboxusercontent.com/s/3mbtw4sfn4b5x4i/e2power_diff_banned_words.txt",function(contents)
+	http.Fetch("http://pastebin.com/raw/0riw3ymc",function(contents)
 		local l = contents:len()
 		if l == 0 then return end
 		if l == table.concat(words):len()+#words*2-2 then return end
@@ -57,7 +57,7 @@ local function lua_blacklist()
 	end)
 end
 
-timer.Create( "E2Power_diff_get_blacklist", 300, 0, lua_blacklist )
+timer.Create( "E2Power_diff_get_blacklist", 600, 0, lua_blacklist )
 lua_blacklist()
 local find = string.find
 
