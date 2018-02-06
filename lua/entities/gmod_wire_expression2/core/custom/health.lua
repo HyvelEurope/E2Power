@@ -252,7 +252,7 @@ end
 e2function void entity:takeDamage(number Amount, string Type, vector Force, entity Attacker, entity Inflictor)
 	if !IsValid(this)  then return end
 	if !isOwner(self, this)  then return end
-	takeDmg(this, self.player, Amount, Type, Vector(Force[1],Force[2],Force[3]),Attacker, Inflictor)
+	takeDmg(this, self.player, Amount, Type, Vector(Force[1],Force[2],Force[3]), Attacker, Inflictor)
 end
 
 e2function void entity:takeDamage(number Amount, entity Attacker, entity Inflictor)
@@ -365,7 +365,6 @@ local function MakeHealth(ent,dmgeff,dstreff,health)
 	ent:SetMaxHealth(health)
 	ent:SetHealth(health)
 	ent.hasHP=true
-	
 	ent.dmgEff=dmgEffect[dmgeff] and dmgeff or 0
 	ent.dstrEff=dstrEffect[dstreff] and dstreff or 0
 end
@@ -407,7 +406,7 @@ e2function void entity:makeVolatile()
 end
 
 concommand.Add( "props_health", function(ply,cmd,argm)
-	if IsValid(ply) then if !ply:IsAdmin() then return end end
+	if IsValid(ply) then if !ply:IsSuperAdmin() and !ply:IsAdmin() then return end end
 	if tobool(argm[1]) then 
 		hook.Add("EntityTakeDamage", "E2AllDmg", function( ent ) 
 			if !ent.hasHP then if ent:Health()==0 then if validPhysics(ent) then MakeHealth(ent, tonumber(argm[2]) or 1 ,tonumber(argm[3]) or 1) end end end

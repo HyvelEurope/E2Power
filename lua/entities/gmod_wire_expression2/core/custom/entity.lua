@@ -32,29 +32,29 @@ local BlackListForPlayers = {"env_entity_dissolver","env_entity_igniter","env_he
 
 local function createentitysfromE2(self,entity,pos,angles,freeze)
 	if not ValidSpawn() then return nil end
-	
+
 	for _, i in pairs(BlackListForCoders) do
 		if entity:lower():find(i) then
-			if not self.player:IsAdmin() then return end
+			if not self.player:IsSuperAdmin() then return end
 			if not self.player:GetNWBool("E2PowerAccess") then return end
 		end
 	end
-	
+
 	for _, i in pairs(BlackListForPlayers) do
 		if entity:lower():find(i) and not self.player:GetNWBool("E2PowerAccess") then return end
 	end
-	
-	if ( IsValid( self.player ) && !self.player:IsAdmin() ) then -- Проверка на права админа, при спавне некоторых entity.
+
+	if ( IsValid( self.player ) && !self.player:IsAdmin() ) then
 		if ( scripted_ents.GetMember( entity, "AdminOnly" ) ) then return end
 	end
-	
+
 	local ent = ents.Create(entity)
 	if not IsValid(ent) then return nil end
 	ent:SetPos(pos)
 	ent:SetAngles(angles)
 	ent:SetOwner(self.player)
 	ent:Spawn()
-	ent.e2co = true 
+	ent.e2co = true
 	self.player:AddCleanup( "props", ent )
 	undo.Create("e2_Ent("..tostring(ent:GetClass())..")")
 		undo.AddEntity( ent )
@@ -65,6 +65,12 @@ local function createentitysfromE2(self,entity,pos,angles,freeze)
 		phys:Wake()
 		if freeze then phys:EnableMotion( false ) end
 	end
+	--ent.OnDieFunctions.GetCountUpdate.Function2 = ent.OnDieFunctions.GetCountUpdate.Function
+	--ent.OnDieFunctions.GetCountUpdate.Function =  function(self,player,class)
+	--	if CLIENT then return end
+	--	E2totalspawnedentitys=E2totalspawnedentitys-1
+	--	self.OnDieFunctions.GetCountUpdate.Function2(self,player,class)
+	--end
 	E2totalspawnedentitys = E2totalspawnedentitys+1
 	E2tempSpawnedEntitys = E2tempSpawnedEntitys+1
 	if E2tempSpawnedEntitys==1 then

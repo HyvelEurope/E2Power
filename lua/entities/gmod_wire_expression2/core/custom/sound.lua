@@ -1,6 +1,6 @@
 -- made by [G-moder]FertNoN
--- modified by [AI]Ubi & Zimon4eR
- 
+-- modified by [AI]Ubi
+
 util.AddNetworkString('E2SoundSendURL')
 
 local VarsE2pTbl = {}
@@ -18,7 +18,7 @@ local function umsgData(ply,com,arg)
 	PrepTbl.alen = tonumber(Data[2],10)
 	PrepTbl.clen = tonumber(Data[3],10)
 	PrepTbl.name = Data[4]
-	
+
 	VarsE2pTbl[PrepTbl.id] = PrepTbl
 end
 concommand.Add("_snddat",umsgData)
@@ -33,22 +33,22 @@ local function umsgFFT(ply,com,arg)
 	end
 
 	VarsE2pTbl[Data[1]].level = PrepTbl
-end 
+end
 concommand.Add("_sndfft",umsgFFT)
 
-local function SoundURL(cmd, ent, id, volume, pos, url, noplay, tar, ply)	
+local function SoundURL(cmd, ent, id, volume, pos, url, noplay, tar, ply)
 	plys = RecipientFilter()
 	if ply==nil then plys:AddAllPlayers() else plys:AddPlayer(ply) end
 	umsg.Start("e2soundURL", plys)
 		umsg.Entity(ent)
 		umsg.Entity(ent:GetPlayer())
-		if type(id)=="string" then 
+		if type(id)=="string" then
 			umsg.String(id)
 		elseif type(id)=="number" then
 			umsg.String(tostring(id))
 		end
-		
-		if cmd=="load" then 
+
+		if cmd=="load" then
 			if !IsValid(tar) and (pos==nil || (pos[1]==0 and pos[2]==0 and pos[3]==0)) and not ent:GetPlayer():GetNWBool('E2PowerAccess') then umsg.Char(-1) umsg.End() return end
 			if tempSound>MaxSoundPerSecond:GetInt() then umsg.Char(-1) umsg.End() return end
 			tempSound=tempSound+1
@@ -63,44 +63,44 @@ local function SoundURL(cmd, ent, id, volume, pos, url, noplay, tar, ply)
 			if pos!=nil then umsg.Vector(Vector(pos[1],pos[2],pos[3])) else umsg.Vector(Vector(0,0,0)) end
 			umsg.Entity(tar)
 		end
-		
-		if cmd=="play" then 
-			umsg.Char(2) 
+
+		if cmd=="play" then
+			umsg.Char(2)
 		end
-		
-		if cmd=="stop" then 
+
+		if cmd=="stop" then
 			umsg.Char(3)
 		end
-		
-		if cmd=="volume" then 
+
+		if cmd=="volume" then
 			umsg.Char(4)
 			umsg.Char(math.Clamp(volume,0,1)*100)
 		end
-		
-		if cmd=="pos" then 
+
+		if cmd=="pos" then
 			umsg.Char(5)
 			umsg.Vector(Vector(pos[1],pos[2],pos[3]))
-		end		
-		
-		if cmd=="del" then 
+		end
+
+		if cmd=="del" then
 			umsg.Char(6)
-		end	
-		
-		if cmd=="par" then 
+		end
+
+		if cmd=="par" then
 			umsg.Char(7)
 			umsg.Entity(tar)
-		end	
-		
-		if cmd=="cls" then 
+		end
+
+		if cmd=="cls" then
 			umsg.Char(0)
-		end		
-	umsg.End() 
+		end
+	umsg.End()
 end
 
 local function sendRequest(ent,id)
 	local EntId = ent:EntIndex()
 	local RecFilt = RecipientFilter()
-	
+
 	RecFilt:AddPlayer(ent.player)
 	umsg.Start("ai_e2_soundurl",RecFilt)
 		umsg.Long(EntId)
@@ -219,12 +219,13 @@ end
 --
 
 e2function void soundURLPurge()
-	SoundURL("cls", self.entity,0)
+	SoundURL("clr", self.entity,0)
 end
 
 e2function void soundPlayAll(string path,volume,pitch)
 	local path = path:Trim()
 	if string.find(path:lower(),"loop",1,true) then return end
+
 	local pitch = math.Clamp(pitch,0,255)
 	local volume = math.Clamp(volume,0,100)/100
 	for _, ply in ipairs( player.GetAll() ) do
@@ -240,7 +241,6 @@ e2function void soundPlayWorld(string path,vector pos,distance,pitch,volume)
 end
 
 __e2setcost(5)
-
 e2function void entity:soundPlaySingle(string path, number volume, number pitch)
 	if !IsValid(this) then return end
 	local path=path:Trim()

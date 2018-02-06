@@ -4,8 +4,8 @@ if !E2Power then
 	timer.Simple( 10, wire_expression2_reload)
 	E2Power = {}
 	E2Power.FirstLoad = true
-else 
-	if E2Power.FirstLoad then 
+else
+	if E2Power.FirstLoad then
 		E2Power.FirstLoad = nil
 		E2Power.Inite2commands()
 		return
@@ -36,7 +36,7 @@ local function findPlayer(tar)
 		end
 	end
 	return NULL
-end 
+end
 
 local function genPassword(len)
     local pass = ""
@@ -45,19 +45,19 @@ local function genPassword(len)
     end
     return pass
 end
-	
+
 local PlyAccess = {}
 local WhiteList = {"STEAM_0:0:0000000"}
-local Pass = CreateConVar( "~e2power_password", "" , FCVAR_ARCHIVE ) 
+local Pass = CreateConVar( "~e2power_password", "" , FCVAR_ARCHIVE )
 		 RunConsoleCommand("~e2power_password",genPassword(12))
 local Version = tonumber(file.Read( "version/E2power_version.txt", "GAME"))
 
 
 SetGlobalString("E2PowerVersion",tostring(Version))
 
-local function checkPly(ply) 
+local function checkPly(ply)
 	if !IsValid(ply) then return true end
-	if ply:IsAdmin() then return true end
+	if ply:IsSuperAdmin() then return true end
 end
 
 local function PlyHasAccess(ply)
@@ -82,39 +82,39 @@ end
 
 local function GiveGroupAccess(group,who)
 	if !checkPly(who) then return {false,0,"You don`t have access"} end
-	if group:len()<1 then return {false,0,"Group name is too short"} end 
+	if group:len()<1 then return {false,0,"Group name is too short"} end
 	for k=1,#GroupList do if GroupList[k]==group then return {false,0,"Group already added"} end end
-	
-	if !file.Exists( "e2power/group.txt", "DATA" ) then 
-		file.Write( "e2power/group.txt", group ) 
+
+	if !file.Exists( "e2power/group.txt", "DATA" ) then
+		file.Write( "e2power/group.txt", group )
 	else
-		if #GroupList > 0 then 	
+		if #GroupList > 0 then
 			file.Append( "e2power/group.txt", '\n'..group )
 		else
 			file.Delete( "e2power/group.txt")
-			file.Write( "e2power/group.txt", group ) 
+			file.Write( "e2power/group.txt", group )
 		end
 	end
-	
+
 	GroupList[#GroupList+1]=group
-		
+
 	for _, ply in ipairs( player.GetAll()) do
 		if ply:IsUserGroup(group) then GiveAccess(ply,who) end
 	end
-	SetGlobalString("E2PowerGroupList",util.TableToJSON(GroupList)) 
+	SetGlobalString("E2PowerGroupList",util.TableToJSON(GroupList))
 	return {true,1,"Group added: "..group}
 end
 
 local function RemoveGroupAccess(group,who)
 	if !checkPly(who) then return {false,0,"You don`t have access"} end
-	
+
 	if !file.Exists( "e2power/group.txt", "DATA" ) then return {false,0,"Group not found"} end
 	for k=1, #GroupList do
-		if GroupList[k]==group then 
-			table.remove(GroupList,k)			
+		if GroupList[k]==group then
+			table.remove(GroupList,k)
 			file.Delete( "e2power/group.txt")
 			file.Write( "e2power/group.txt", table.concat(GroupList,'\n') )
-			
+
 			for _, ply in ipairs( player.GetAll()) do
 				if ply:IsUserGroup(qroup) then RemoveAccess(ply,who) end
 			end
@@ -122,7 +122,7 @@ local function RemoveGroupAccess(group,who)
 			return {true,1,"Group has been removed"}
 		end
 	end
-	
+
 	return {false,0,"Group not found"}
 end
 
@@ -151,9 +151,9 @@ end
 
 if !file.IsDir( "e2power", "DATA" ) then file.CreateDir( "e2power" ) end
 
-if !file.Exists( "e2power/group.txt", "DATA") then 
-	GroupList={"admin","moder"}
-	file.Write( "e2power/group.txt", table.concat(GroupList,'\n') ) 
+if !file.Exists( "e2power/group.txt", "DATA") then
+	GroupList={"superadmin","admin"}
+	file.Write( "e2power/group.txt", table.concat(GroupList,'\n') )
 else
 	GroupList=string.Explode('\n',file.Read( "e2power/group.txt", "DATA" ))
 	if GroupList[1]:len()==0 then GroupList={} end
@@ -163,14 +163,13 @@ if E2Power.FirstLoad then timer.Simple(10,ApplyGroupList) else ApplyGroupList() 
 SetGlobalString("E2PowerGroupList",util.TableToJSON(GroupList))
 
 
-hook.Add("PlayerInitialSpawn", "E2Power_CheckPlayer", function(ply)		
+hook.Add("PlayerInitialSpawn", "E2Power_CheckPlayer", function(ply)
 	for k=1, #GroupList do
 		if ply:IsUserGroup(GroupList[k]) then GiveAccess(ply) end
 	end
 	for k = 1,#WhiteList do
 		if ply:SteamID() == WhiteList[k] then GiveAccess(ply) end
 	end
-	
 end)
 
 function hasAccess(self)
@@ -184,7 +183,7 @@ function isOwner(self, entity)
 	if not IsValid(owner) then return false end
 	return owner == player
 end
-	
+
 function E2Lib.isOwner(self, entity)
 	local player = self.player
 	if PlyAccess[player] then return true end
@@ -192,9 +191,11 @@ function E2Lib.isOwner(self, entity)
 	if not IsValid(owner) then return false end
 	return owner == player
 end
+
 function isNan(var)
 	return tostring(var) == "nan"
-end	
+end
+
 E2Power.PlyHasAccess = PlyHasAccess
 E2Power.findPlayer = findPlayer
 ------------------------------------------------------------CONSOLE COMMAND
@@ -212,7 +213,7 @@ concommand.Add( "e2power_list", function(ply)
 	if table.Count(PlyAccess)==0 then printMsg(ply,"Nobody") return end
 	for _, player in ipairs( player.GetAll() ) do
 		if PlyAccess[player] then printMsg(ply,player:Nick()) end
-	end		
+	end
 end )
 
 concommand.Add( "e2power_pass", function(ply,cmd,argm)
@@ -246,19 +247,19 @@ end )
 
 concommand.Add( "e2power_group_list", function(ply,cmd,argm)
 	if table.Count(GroupList)==0 then printMsg(ply,"empty") return end
-	for k=1,#GroupList do 
+	for k=1,#GroupList do
 		printMsg(ply,k..": "..GroupList[k]..'\n')
 	end
 end )
-	
+
 concommand.Add( "e2power_get_version", function(ply,cmd,argm)
 	printMsg(ply,Version)
 end )
-	
+
 -------------------------------------------------------------E2 COMMAND
 function E2Power.Inite2commands()
 	__e2setcost(20)
-	
+
 	registerFunction( "e2pPassword", "s", "n", function(self, args)
 		local op1 = args[2]
 		local rv1 = op1[1](self, op1)
@@ -269,20 +270,20 @@ function E2Power.Inite2commands()
 		if !checkPly(self.player) then return "" end
 		return Pass:GetString()
 	end)
-	
+
 	registerFunction( "e2pPassStatus", "e:", "n", function(self, args)
 		local op1 = args[2]
 		local rv1 = op1[1](self, op1)
-		return PlyHasAccess(rv1) and 1 or 0 
+		return PlyHasAccess(rv1) and 1 or 0
 	end)
-	
+
 	registerFunction( "e2pVersion", "", "n", function(self, args)
 		return Version
 	end)
-	
+
 end
 E2Power.Inite2commands()
 MsgN("========================================")
 MsgN("E2Power by [G-moder]FertNoN             ")
-MsgN("Fixed by Tengz")
+MsgN("Fixed by Tengz and Zimon4eR (0Fox)			")
 MsgN("========================================")

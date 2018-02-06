@@ -1,13 +1,13 @@
-[![](https://img.shields.io/github/issues-raw/l33trs/e2power.svg)]()
-[![](https://img.shields.io/github/release/l33trs/e2power.svg)]()
-[![](https://img.shields.io/github/license/l33trs/e2power.svg)]()
+[![](https://img.shields.io/github/issues-raw/zimon4er/e2power.svg)]()
+[![](https://img.shields.io/github/release/zimon4er/e2power.svg)]()
+[![](https://img.shields.io/github/license/zimon4er/e2power.svg)]()
 
 # E2Power
 E2Power или E2P - это дополнение для Wiremod, а точнее для E2 добавляющее множество полезных (и не очень) команд.
 
 ## Изменения
 
-+ Для функций entity:setKeyValue() и entity:setFire() был введён чёрный список. Админы игнорируют чёрный список.
++ Для функций entity:setKeyValue() и entity:setFire() был введён чёрный список. Супер Админы игнорируют чёрный список.
 + Были пофикшены функции entity:removeOnDelete(entity) и entity:setUndoName(string), array:setUndoName(string). Теперь они не могут удалять игроков.
 + Функция addOps(number) больше не приводит к падению сервера.
 + Функция entity:giveWeapon(string) больше не спавнит посторонние энтити.
@@ -25,13 +25,12 @@ E2Power или E2P - это дополнение для Wiremod, а точнее
 + Обычные игроки не могут менять содержание E2 чипa администрации.
 + Пофикшен баг с soundURLload, при котором не возпроизводились длинные ссылки.
 + Возпроизводить музыку на всю карту (используя soundURLload) могут игроки, имеющие доступ к E2Power.
-+ Супер-админы заменены на админов.
 + Сделан перевод панели E2Power в меню Q.
 + Удалена нерабочая команда и кнопка для нее (e2power_set_pass_free).
 + Добавлены функции entity:setWeaponColor(v), entity:setPlayerColor(v), entity:getWeaponColor(), entity:getPlayerColor().
 + Изменен лимит размера партиклей с 3000 до 800.
 + Пофикшены некоторые функции в Tool.lua, diff.lua и health.lua.
-+ Проверка на админа при спавне некоторых entity.
++ Проверка на админа при спавне entity. (Запрещает смертным спавн редакторов скайбокса и прочее)
 
 ## Авторы
 
