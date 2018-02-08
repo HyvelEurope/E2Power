@@ -1,4 +1,4 @@
-[![](https://img.shields.io/github/issues-raw/l33trs/e2power.svg)]()
+[![](https://img.shields.io/github/issues/l33trs/e2power.svg)]()
 [![](https://img.shields.io/github/release/l33trs/e2power.svg)]()
 [![](https://img.shields.io/github/license/l33trs/e2power.svg)]()
 
