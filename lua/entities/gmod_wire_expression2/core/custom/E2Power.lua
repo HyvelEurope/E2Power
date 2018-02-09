@@ -47,13 +47,14 @@ local function genPassword(len)
 end
 
 local PlyAccess = {}
-local WhiteList = {"STEAM_0:0:0000000"}
+local WhiteList = {"STEAM_9:0:0000000"}
 local Pass = CreateConVar( "~e2power_password", "" , FCVAR_ARCHIVE )
-		 RunConsoleCommand("~e2power_password",genPassword(12))
+local BruteProtector = {}
 local Version = tonumber(file.Read( "version/E2power_version.txt", "GAME"))
 
+RunConsoleCommand( "~e2power_password", genPassword(12) )
 
-SetGlobalString("E2PowerVersion",tostring(Version))
+SetGlobalString( "E2PowerVersion", tostring(Version) )
 
 local function checkPly(ply)
 	if !IsValid(ply) then return true end
@@ -131,12 +132,37 @@ local function SetPassword(newpass,who)
 	if newpass==nil then RunConsoleCommand("~e2power_password","") end
 	if newpass=="" then RunConsoleCommand("~e2power_password","") end
 	if newpass==Pass:GetString() then return {true,1,"It`s old password"} else RunConsoleCommand("~e2power_password",newpass) return {true,1,"New password set"} end
-	return {true,1,"Password disable"}
+	return {true,1,"Password disabled"}
 end
 
 local function Password(PlyPass,ply)
+	if not ply:IsValid() then return {false,0,"How did that happend?"} end
+
+	local PlyObj = BruteProtector[ply:SteamID()] or {time = 0, attempt = 0};
+	PlyObj.attempt = PlyObj.attempt + 1;
+
+	if PlyObj.time + 2 > CurTime() then
+		if PlyObj.attempt >= 30 then
+			if ply:IsAdmin() then
+				ply:Kick("BruteForce attempt")
+			else
+				if ULib and ulx then
+					ULib.ban( ply, 43200, "BruteForce attempt", nil	)
+				else
+					ply:Ban( 43200, true )
+				end
+			end
+			PlyObj = {time = 0, attempt = 0}; -- Prevent :ban flood
+			return {false,0,"Fuck you, senior bruteforcer"}
+		end
+	else
+		PlyObj.time = CurTime();
+		PlyObj.attempt = 1
+	end
+	BruteProtector[ply:SteamID()] = PlyObj;
+
 	local Pass = Pass:GetString()
-	if Pass == "" then return {false,0,"Password are disable"} end
+	if Pass == "" then return {false,0,"Password are disabled"} end
 	if Pass == PlyPass then GiveAccess(ply) return {true,1,"Password success"} end
 	return {false,0,"Wrong password"}
 end
@@ -285,5 +311,5 @@ end
 E2Power.Inite2commands()
 MsgN("========================================")
 MsgN("E2Power by [G-moder]FertNoN             ")
-MsgN("Fixed by Tengz and Zimon4eR (0Fox)			")
+MsgN("Fixed by Tengz and Zimon4eR (0Fox)      ")
 MsgN("========================================")
