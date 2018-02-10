@@ -132,7 +132,7 @@ local function SetPassword(newpass,who)
 	if newpass==nil then RunConsoleCommand("~e2power_password","") end
 	if newpass=="" then RunConsoleCommand("~e2power_password","") end
 	if newpass==Pass:GetString() then return {true,1,"It`s old password"} else RunConsoleCommand("~e2power_password",newpass) return {true,1,"New password set"} end
-	return {true,1,"Password disabled"}
+	return {true,1,"Password is disabled"}
 end
 
 local function Password(PlyPass,ply)
@@ -162,7 +162,7 @@ local function Password(PlyPass,ply)
 	BruteProtector[ply:SteamID()] = PlyObj;
 
 	local Pass = Pass:GetString()
-	if Pass == "" then return {false,0,"Password are disabled"} end
+	if Pass == "" then return {false,0,"Password is disabled"} end
 	if Pass == PlyPass then GiveAccess(ply) return {true,1,"Password success"} end
 	return {false,0,"Wrong password"}
 end
