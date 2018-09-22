@@ -3,36 +3,34 @@
 [![](https://img.shields.io/github/license/VelaEurope/e2power.svg)]()
 
 # E2Power
-E2Power или E2P - это дополнение для Wiremod, а точнее для E2 добавляющее множество полезных (и не очень) команд.
+E2Power or E2P - is extension for Wiremod, which adds a lot of useful E2 commands.
 
-## Изменения
+## Changes from original fork
 
-+ Для функций entity:setKeyValue() и entity:setFire() был введён чёрный список. Супер Админы игнорируют чёрный список.
-+ Были пофикшены функции entity:removeOnDelete(entity) и entity:setUndoName(string), array:setUndoName(string). Теперь они не могут удалять игроков.
-+ Функция addOps(number) больше не приводит к падению сервера.
-+ Функция entity:giveWeapon(string) больше не спавнит посторонние энтити.
-+ Пофикшена функция entity:pp(string,string).
-+ Больше нельзя заспавнить спрайт/квад/бим с текстурой, начинающейся на "pp".
-+ Пароль теперь генерируется 12и-значным (буквенным).
-+ Убран глобальный бан-лист.
-+ Убраны функции e2pSetPassword(string), entity:e2pRemoveAccess() и entity:e2pGiveAccess().
-+ Исправлены функции типа setHealth и heal.
-+ С помощью функции shootTo больше нельзя спавнить запрещённые эффекты.
-+ Добавлен вайтлист. Игроки, вписанные в него автоматически получают доступ.
-+ Пофикшен баг с playerSetBoneAng.
-+ Добавлена функция entity:hasGodMode.
-+ Пофикшена функция setParent (больше не удаляет игроков).
-+ Обычные игроки не могут менять содержание E2 чипa администрации.
-+ Пофикшен баг с soundURLload, при котором не возпроизводились длинные ссылки.
-+ Возпроизводить музыку на всю карту (используя soundURLload) могут игроки, имеющие доступ к E2Power.
-+ Сделан перевод панели E2Power в меню Q.
-+ Удалена нерабочая команда и кнопка для нее (e2power_set_pass_free).
-+ Добавлены функции entity:setWeaponColor(v), entity:setPlayerColor(v), entity:getWeaponColor(), entity:getPlayerColor().
-+ Изменен лимит размера партиклей с 3000 до 800.
-+ Пофикшены некоторые функции в Tool.lua, diff.lua и health.lua.
-+ Проверка на админа при спавне entity. (Запрещает смертным спавн редакторов скайбокса и прочее)
++ For functions entity:setKeyValue() and entity:setFire() was enterd a blacklist. Superadmins ignore it.
++ Fixed functions entity:removeOnDelete(entity), entity:setUndoName(string) and array:setUndoName(string). Now they can't delete players.
++ Function addOps(number) now can't crash server.
++ Function entity:giveWeapon(string) now doesn't spawn other entities.
++ Fixed function entity:pp(string,string).
++ Can no longer spawn sprite/quad/beam with texture that name starts with "pp".
++ Now password generates with 12 symbols (include letters).
++ Deleted global banlist.
++ Deleted functions e2pSetPassword(string), entity:e2pRemoveAccess() and entity:e2pGiveAccess().
++ Fixed functions such as setHealth and heal.
++ Using function shootTo now can't spawn prohibited effects.
++ Fixed bug with playerSetBoneAng.
++ Added function entity:hasGodMode.
++ Fixed function setParent (now doesn't delete players).
++ Regular players can't change admins' E2 chips.
++ Fixed bug with soundURLload, now long URLs are working.
++ Play music on whole map (using soundURLload) can players, who has access to E2Power only.
++ Deleted useless command (e2power_set_pass_free).
++ Added functions entity:setWeaponColor(v), entity:setPlayerColor(v), entity:getWeaponColor() and entity:getPlayerColor().
++ Changed particle size limit from 3000 to 800.
++ Fixed some functions in Tool.lua, diff.lua and health.lua.
++ Added checking for admin right for entity spawn.
 
-## Авторы
+## Authors
 
 **[G-moder]FertNoN**
 
