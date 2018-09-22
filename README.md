@@ -29,6 +29,7 @@ E2Power or E2P - is extension for Wiremod, which adds a lot of useful E2 command
 + Changed particle size limit from 3000 to 800.
 + Fixed some functions in Tool.lua, diff.lua and health.lua.
 + Added checking for admin right for entity spawn.
++ Added bruteforce protection.
 
 ## Authors
 
