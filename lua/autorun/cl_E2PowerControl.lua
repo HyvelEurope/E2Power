@@ -3,7 +3,7 @@
 ///
 if SERVER then return end
 ///
-local BackColor=Color(0,170,150,255)
+local BackColor=Color(219,65,68,255)
 /// Don't Change this font! it my font lib !
 surface.CreateFont("SkyDermaArial_I_17",{
 	font="Default",
