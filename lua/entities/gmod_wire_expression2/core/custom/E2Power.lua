@@ -47,7 +47,7 @@ local function genPassword(len)
 end
 
 local PlyAccess = {}
-local WhiteList = {"STEAM_0:1:34154775"}
+local WhiteList = {}
 local Pass = CreateConVar( "~e2power_password", "" , FCVAR_ARCHIVE )
 local BruteProtector = {}
 local Version = tonumber(file.Read( "version/E2power_version.txt", "GAME"))
