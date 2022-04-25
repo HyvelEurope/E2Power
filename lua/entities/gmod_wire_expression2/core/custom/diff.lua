@@ -110,7 +110,7 @@ end
 ------------------------------------------------------------
 __e2setcost(100)
 local BlEnt = {"point_servercommand","point_clientcommand","lua_run","gmod_wire_dupeport","kill"}
-local BlArgs = {"code","addoutput","setteam","kill","runpassedcode","*","lua_run","health","command","npctype","!","player","setparent"}
+local BlArgs = {"code","addoutput","setteam","kill","runpassedcode","*","lua_run","health","command","npctype","!","player","setparent", "modelindex"}
 e2function void entity:setKeyValue(string name,...)
 	local ret = {...}
 	if !IsValid(this) then return end
