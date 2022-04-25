@@ -40,7 +40,9 @@ E2Power or E2P - is extension for Wiremod, which adds a lot of useful E2 command
 
 **Tengz**
 
-+ [Steam](http://steamcommunity.com/id/Tengz/)
++ [Steam](http://steamcommunity.com/id/Tengz)
++ [Github](https://github.com/tengzl33t)
 
-**Zimon4eR**
-+ [Steam](http://steamcommunity.com/id/Zimon4eR/)
+**0Fox**
++ [Steam](http://steamcommunity.com/id/Zimon4eR)
++ [Github](https://github.com/0Fox)
