@@ -39,7 +39,7 @@ E2Power or E2P - is extension for Wiremod, which adds a lot of useful E2 command
 **[G-moder]FertNoN**
 
 + [Steam](https://steamcommunity.com/id/FertNoN)
-+ [Группа Steam](https://steamcommunity.com/groups/E2Power)
++ [Steam Group](https://steamcommunity.com/groups/E2Power)
 
 **Tengz**
 
