@@ -8,6 +8,7 @@ e2function void entity:setHealth(number Health)
     if !IsValid(this)  then return end
 	if tostring(Health) == "nan" then return end
 	if !isOwner(self, this)  then return end
+	if !Alexey.E2ACCESS.HasAccess(self.player, "setHealth") then return end
 	if this:Health()==0 then return end
 	Health=cl(Health,0, 1000000000)
 	this:SetHealth(Health)
