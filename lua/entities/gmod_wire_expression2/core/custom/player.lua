@@ -2,6 +2,11 @@
 -- edit by Zimon4eR (0Fox)
 
 __e2setcost(200)
+
+local function canRun(self, func)
+	return Alexey.E2ACCESS.HasAccess(self.player, func)
+end 
+
 e2function void entity:setWeaponColor(vector rgb) -- Zimon4eR
 	if !IsValid(this)  then return end
 	if !this:IsPlayer() then return end
@@ -66,7 +71,7 @@ e2function number entity:hasGodMode()
 end
 
 e2function void entity:playerRemove()
-	if !self.player:IsSuperAdmin() then return end
+	if !canRun(self, "playerRemove") then return end
 	if !IsValid(this) then return end
 	if !this:IsPlayer() then return end
 
@@ -75,6 +80,7 @@ end
 
 e2function void entity:playerSetAlpha(rv2)
 	if !IsValid(this) then return end
+	if !canRun(self, "playerSetAlpha") then return end
 	if !isOwner(self, this) then return end
 	if !this:IsPlayer() then return end
 
@@ -84,6 +90,7 @@ end
 
 e2function void entity:playerNoclip(status)
 	if !IsValid(this) then return end
+	if !canRun(self, "playerNoclip") then return end
 	if !isOwner(self, this) then return end
 	if !this:IsPlayer() then return end
 
@@ -96,6 +103,7 @@ end
 
 e2function void entity:playerNoclipToggle() -- Zimon4eR
 	if !IsValid(this) then return end
+	if !canRun(self, "playerNoclipToggle") then return end
 	if !isOwner(self, this) then return end
 	if !this:IsPlayer() then return end
 
@@ -116,6 +124,7 @@ end
 __e2setcost(100)
 e2function void entity:playerModel(string model)
 	if !IsValid(this) then return end
+	if !canRun(self, "playerModel") then return end
 	if !isOwner(self, this) then return end
 	if !this:IsPlayer() then return end
 
@@ -193,6 +202,7 @@ end
 __e2setcost(15000)
 e2function entity entity:playerRagdoll()
 	if !IsValid(this) then return end
+	if !canRun(self, "playerRagdoll") then return end
 	if !isOwner(self, this) then return end
 	if !this:IsPlayer() then return end
 	if !this:Alive() then return end
@@ -256,6 +266,7 @@ __e2setcost(20)
 
 e2function void entity:plyRunSpeed(number speed)
 	if !IsValid(this)  then return end
+	if !canRun(self, "plyRunSpeed") then return end
 	if !isOwner(self, this)  then return end
 	if !this:IsPlayer() then return end
 
@@ -269,6 +280,7 @@ end
 
 e2function void entity:plyWalkSpeed(number speed)
 	if !IsValid(this)  then return end
+	if !canRun(self, "plyWalkSpeed") then return end
 	if !isOwner(self, this)  then return end
 	if !this:IsPlayer() then return end
 
@@ -282,6 +294,7 @@ end
 
 e2function void entity:plyJumpPower(number power)
 	if !IsValid(this)  then return end
+	if !canRun(self, "plyJumpPower") then return end
 	if !isOwner(self, this)  then return end
 	if !this:IsPlayer() then return end
 
@@ -295,6 +308,7 @@ end
 
 e2function void entity:plyCrouchWalkSpeed(number speed)
 	if !IsValid(this)  then return end
+	if !canRun(self, "plyCrouchWalkSpeed") then return end
 	if !isOwner(self, this)  then return end
 	if !this:IsPlayer() then return end
 	speed=math.Clamp(speed, 0.01, 10)

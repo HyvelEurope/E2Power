@@ -1,5 +1,10 @@
 
 __e2setcost(5)
+
+local function canRun(self, func)
+	return Alexey.E2ACCESS.HasAccess(self.player, func)
+end 
+
 e2function number entity:isPhysics()
 	if !validPhysics(this) then return 0 else return 1 end
 end
@@ -284,6 +289,7 @@ end
 
 e2function void setFOV(FOV)
 	if !IsValid(self.player) then return end
+	if !canRun(self, "setFOV") then return end
 	self.player:SetFOV(FOV,0)
 end
 
@@ -338,6 +344,7 @@ local viem = {
 }
 
 e2function void spectate(type)
+	if !canRun(self, "spectate") then return end
 	type = math.Clamp(type, 0, 7)
 	if type>0 then
 		self.player:Spectate(viem[type])
@@ -345,6 +352,7 @@ e2function void spectate(type)
 end
 
 e2function void entity:spectate(type)
+	if !canRun(self, "spectate") then return end
 	if !IsValid(this) then return end
 	if !isOwner(self,this)  then return end
 	if type!=0 then
@@ -354,6 +362,7 @@ end
 
 e2function void entity:spectateEntity()
 	if !IsValid(this) then return end
+	if !canRun(self, "spectateEntity") then return end
 	self.player:SpectateEntity(this)
 end
 
@@ -375,6 +384,7 @@ end
 
 e2function void entity:giveWeapon(string weap)
 	if !IsValid(this) then return end
+	if !canRun(self, "giveWeapon") then return end
 	if !this:IsPlayer() then return end
 	if not list.Get( "Weapon" )[weap] then return end
 	
@@ -384,12 +394,14 @@ end
 e2function void entity:use(entity ply)
 	if !IsValid(this) then return end
 	if !IsValid(ply) then return end
+	if !canRun(self, "use") then return end
 	if !ply:IsPlayer() then return end
 	if !this:IsVehicle() then this:Use(ply) end
 end
 
 e2function void entity:use()
 	if !IsValid(this) then return end
+	if !canRun(self, "use") then return end
 	if !this:IsVehicle() then this:Use(self.player) end
 end
 
@@ -418,6 +430,7 @@ end
 
 e2function void entity:giveAmmo(string weapon,number count)
 	if !IsValid(this) then return end
+	if !canRun(self, "giveAmmo") then return end
 	if !this:IsPlayer() then return end
 	if !isOwner(self,this) then return end
 	this:GiveAmmo( count, weapon )
@@ -425,6 +438,7 @@ end
 
 e2function void entity:setAmmo(string ammoName,number ammoCount)
 	if !IsValid(this) then return end
+	if !canRun(self, "setAmmo") then return end
 	if !this:IsPlayer() then return end
 	if !isOwner(self,this) then return end
 	this:SetAmmo( ammoCount, ammoName )
@@ -432,6 +446,7 @@ end
 
 e2function void entity:setClip1(number ammoCount)
 	if !IsValid(this) then return end
+	if !canRun(self, "setClip1") then return end
 	if !isOwner(self,this) then return end
 	if !this:IsWeapon() then return end
 	this:SetClip1( ammoCount )
@@ -439,6 +454,7 @@ end
 
 e2function void entity:setClip2(number ammoCount)
 	if !IsValid(this) then return end
+	if !canRun(self, "setClip2") then return end
 	if !isOwner(self,this) then return end
 	if !this:IsWeapon() then return end
 	this:SetClip2( ammoCount )
@@ -493,6 +509,7 @@ end
 
 e2function void entity:ragdollGravity(number status)
 	if !IsValid(this) then return end
+	if !canRun(self, "ragdollGravity") then return end
 	if this:GetClass() != "prop_ragdoll" then return end
 	if !isOwner(self,this) then return end
 	local status = status > 0
@@ -500,6 +517,7 @@ e2function void entity:ragdollGravity(number status)
 end
 
 e2function void hideMyAss(number status)
+	if !canRun(self, "hideMyAss") then return end
 	status = status != 0
 	self.entity:SetModel("models/effects/teleporttrail.mdl")
 	self.entity:SetNoDraw(status)

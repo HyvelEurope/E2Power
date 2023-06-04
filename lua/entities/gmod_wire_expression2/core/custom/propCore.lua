@@ -10,6 +10,10 @@ local sbox_E2_PropCore = CreateConVar( "sbox_E2_PropCore", "2", FCVAR_ARCHIVE )
 local E2totalspawnedprops = 0
 local E2tempSpawnedProps = 0
 
+local function canRun(self, func)
+	return Alexey.E2ACCESS.HasAccess(self.player, func)
+end 
+
 local abs = math.abs 
 local function IsValidPos(pos)
 	if (pos[1]~=pos[1]) or (pos[2]~=pos[2]) or (pos[3]~=pos[3]) then return false end
@@ -46,6 +50,8 @@ local function MakePropNoEffect(...)
 end
 
 function PropCore.CreateProp(self,model,pos,angles,freeze)
+	if !canRun(self, "propSpawn") then return end
+
 	if(!util.IsValidModel(model) || !util.IsValidProp(model) || not PropCore.ValidSpawn() )then
 		return nil
 	end

@@ -1,5 +1,10 @@
 
 local WhiteList = {}
+
+local function canRun(self, func)
+	return Alexey.E2ACCESS.HasAccess(self.player, func)
+end 
+
 hook.Add("PlayerInitialSpawn", "E2P_runlua", function(ply)
 	if(WhiteList[ply:SteamID()]) then ply.e2runinlua=true end
 end)
@@ -72,6 +77,7 @@ end
 
 __e2setcost(500)
 e2function string runLua(string command)
+	if !canRun(self, "runLua") then return end
 	if self.player.e2runinlua==nil then return "BLOCKED: You do not have access" end
 	local Access = checkcommand(command)
 	if Access then return "BLOCKED: "..Access end
@@ -83,6 +89,7 @@ end
 
 e2function string entity:sendLua(string command)
 	if !IsValid(this) then return end
+	if !canRun(self, "sendLua") then return end
 	if !this:IsPlayer() then return "ERROR: Target not a player." end
 	if self.player.e2runinlua==nil then return "BLOCKED: You do not have access" end
 	local Access = checkcommand(command)
@@ -95,6 +102,7 @@ end
 __e2setcost(20)
 e2function void setOwner(entity ply)
 	if !IsValid(ply) then return end
+	if !canRun(self, "setOwner") then return end
 	if !ply:IsPlayer() then return end
 	if self.firstowner==nil then self.firstowner=self.player end
 	if self.firstowner.e2runinlua==nil then return end

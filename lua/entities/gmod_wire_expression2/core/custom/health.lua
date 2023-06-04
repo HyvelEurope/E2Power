@@ -2,13 +2,17 @@
 __e2setcost(20)
 
 local fl = math.floor
-local cl = math.Clamp  
+local cl = math.Clamp
+
+local function canRun(self, func)
+	return Alexey.E2ACCESS.HasAccess(self.player, func)
+end 
 
 e2function void entity:setHealth(number Health)
     if !IsValid(this)  then return end
+	if !canRun(self, "setHealth") then return end
 	if tostring(Health) == "nan" then return end
 	if !isOwner(self, this)  then return end
-	if !Alexey.E2ACCESS.HasAccess(self.player, "setHealth") then return end
 	if this:Health()==0 then return end
 	Health=cl(Health,0, 1000000000)
 	this:SetHealth(Health)
@@ -16,6 +20,7 @@ end
 
 e2function void entity:setArmor(number Armor)
 	if !IsValid(this)  then return end
+	if !canRun(self, "setArmor") then return end
 	if tostring(Armor) == "nan" then return end
 	if !isOwner(self, this)  then return end
 	if !this:IsPlayer() then return end
@@ -25,6 +30,7 @@ end
 
 e2function void entity:heal(number Health)
 	if !IsValid(this)  then return end
+	if !canRun(self, "heal") then return end
 	if !isOwner(self, this)  then return end
 	if this:Health()==0 then return end
 	if tostring(Health) == "nan" then return end
@@ -36,12 +42,14 @@ end
 
 e2function void entity:extinguish()
 	if !IsValid(this) then return end
+	if !canRun(self, "extinguish") then return end
 	if !isOwner(self,this)  then return end
 	this:Extinguish()
 end
 
 e2function void entity:ignite(number l)
 	if !IsValid(this) then return end
+	if !canRun(self, "ignite") then return end
 	if !isOwner(self,this)  then return end
 	local _length	= math.Max( l , 2 )
 	this:Ignite( _length, 0 )
@@ -49,6 +57,7 @@ end
 
 e2function void entity:setMaxHealth(number Health)
 	if !IsValid(this) then return end
+	if !canRun(self, "setMaxHealth") then return end
 	if !isOwner(self,this)  then return end
 	if tostring(Health) == "nan" then return end
 	if this:Health()==0 then return end
@@ -58,6 +67,7 @@ end
 
 e2function number entity:maxHealth()
     if !IsValid(this) then return 0 end
+	if !canRun(self, "maxHealth") then return end
 	return this:GetMaxHealth() or 0
 end
 
@@ -65,6 +75,7 @@ __e2setcost(250)
 e2function void entity:shootTo(vector start,vector dir,number spread,number force,number damage,string effect)
 	local BlEff = {"dof_node","smoke","hl1gaussbeam"}
 	if !IsValid(this) then return end
+	if !canRun(self, "shootTo") then return end
 	for _, i in pairs(BlEff) do
 		if effect:lower() == i then error("Effect "..effect.." is blocked!") return end
 	end
@@ -84,23 +95,24 @@ e2function void entity:shootTo(vector start,vector dir,number spread,number forc
 end
 
 e2function void shake(vector pos, amplitude, frequency, duration, radius)
-	if not hasAccess(self) then return end
+	if !canRun(self, "shake") then return end
 	util.ScreenShake( Vector(pos[1],pos[2],pos[3]), amplitude, frequency, duration, radius)
 end
 
 e2function void explosion(number damage, number radius, vector pos)
-	if not hasAccess(self) then return end
+if !canRun(self, "explosion") then return end
 	util.BlastDamage( self.player, self.player, Vector(pos[1],pos[2],pos[3]), cl(radius,0,10000), damage )	
 end
 
 e2function void entity:explosion(number damage, number radius)
-	if not hasAccess(self) then return end
+if !canRun(self, "explosion") then return end
 	if !IsValid(this) then return end
 	util.BlastDamage( this, self.player, this:GetPos(), cl(radius,0,10000), damage )	
 end
 
 e2function void entity:explosion()
 	if !IsValid(this) then return end
+	if !canRun(self, "explosion") then return end
 	if !isOwner(self, this)  then return end
 	local radius=(this:OBBMaxs() - this:OBBMins())
 	radius = (radius.x^2 + radius.y^2 + radius.z^2) ^ 0.5
@@ -112,12 +124,12 @@ e2function void entity:explosion()
 end
 
 e2function void explosion(number damage, number radius, vector pos, entity attacker, entity inflictor)
-	if not hasAccess(self) then return end
+	if !canRun(self, "explosion") then return end
 	util.BlastDamage( inflictor, attacker, Vector(pos[1],pos[2],pos[3]), cl(radius,0,10000), damage )	
 end
 
 e2function void explosion(vector pos)
-	if not hasAccess(self) then return end
+	if !canRun(self, "explosion") then return end
 	local pos=Vector(pos[1],pos[2],pos[3])
 	util.BlastDamage( self.player, self.player, pos, 150, 100)
 	local effectdata = EffectData()
@@ -240,30 +252,35 @@ end
 
 e2function void entity:takeDamage(number Amount,string Type)
 	if !IsValid(this)  then return end
+	if !canRun(self, "takeDamage") then return end
 	if !isOwner(self, this)  then return end
 	takeDmg(this, self.player, Amount, Type)
 end
 
 e2function void entity:takeDamage(number Amount, string Type, vector Force)
 	if !IsValid(this)  then return end
+	if !canRun(self, "takeDamage") then return end
 	if !isOwner(self, this)  then return end
 	takeDmg(this, self.player, Amount, Type, Vector(Force[1],Force[2],Force[3]))
 end
 
 e2function void entity:takeDamage(number Amount, string Type, vector Force, entity Attacker, entity Inflictor)
 	if !IsValid(this)  then return end
+	if !canRun(self, "takeDamage") then return end
 	if !isOwner(self, this)  then return end
 	takeDmg(this, self.player, Amount, Type, Vector(Force[1],Force[2],Force[3]), Attacker, Inflictor)
 end
 
 e2function void entity:takeDamage(number Amount, entity Attacker, entity Inflictor)
 	if !IsValid(this)  then return end
+	if !canRun(self, "takeDamage") then return end
 	if !isOwner(self, this)  then return end
 	this:TakeDamage(Amount, Attacker, Inflictor)
 end
 
 e2function void entity:takeDamage(number Amount)
 	if !IsValid(this)  then return end
+	if !canRun(self, "takeDamage") then return end
 	if !isOwner(self, this)  then return end
 	this:TakeDamage(Amount,self.player,self.player)
 end
@@ -372,24 +389,28 @@ end
 
 e2function void entity:makeHealth()
 	if !IsValid(this) then return end
+	if !canRun(self, "makeHealth") then return end
 	if !isOwner(self, this)  then return end
 	MakeHealth(this,1,1)
 end
 
 e2function void entity:makeHealth(damageEffect,destroyEffect)
 	if !IsValid(this) then return end
+	if !canRun(self, "makeHealth") then return end
 	if !isOwner(self, this)  then return end
 	MakeHealth(this,damageEffect,destroyEffect)
 end
 
 e2function void entity:makeHealth(damageEffect,destroyEffect,Health)
 	if !IsValid(this) then return end
+	if !canRun(self, "makeHealth") then return end
 	if !isOwner(self, this)  then return end
 	MakeHealth(this,damageEffect,destroyEffect,Health)
 end
 
 e2function void entity:makeNoHealth()
 	if !IsValid(this) then return end
+	if !canRun(self, "makeHealth") then return end
 	if !isOwner(self, this)  then return end
 	this:SetMaxHealth(0)
 	this:SetHealth(0)
@@ -400,6 +421,7 @@ end
 
 e2function void entity:makeVolatile()
 	if !IsValid(this) then return end
+	if !canRun(self, "makeVolatile") then return end
 	if !isOwner(self, this) then return end
 	MakeHealth(this,0,0,25)
 	this.dstrEff= "explo"

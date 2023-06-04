@@ -6,6 +6,10 @@ hook.Add("PlayerInitialSpawn", "wire_expression2_entitycore", function(ply)
 	ply:SendLua('language.Add("Undone_e2_spawned_entity", "E2 Spawned Entity")')
 end)
 
+local function canRun(self, func)
+	return Alexey.E2ACCESS.HasAccess(self.player, func)
+end 
+
 local sbox_e2_maxentitys = CreateConVar( "sbox_e2_maxentitys", "30", FCVAR_ARCHIVE )
 local sbox_e2_maxentitys_persecond = CreateConVar( "sbox_e2_maxentitys_persecond", "6", FCVAR_ARCHIVE )
 local sbox_e2_entitycore = CreateConVar( "sbox_e2_entitycore", "2", FCVAR_ARCHIVE )
@@ -32,6 +36,8 @@ local BlackListForPlayers = {"env_entity_dissolver","env_entity_igniter","env_he
 
 local function createentitysfromE2(self,entity,pos,angles,freeze)
 	if not ValidSpawn() then return nil end
+
+	if !canRun(self, "entitySpawn") then return end
 
 	for _, i in pairs(BlackListForCoders) do
 		if entity:lower():find(i) then
@@ -131,12 +137,14 @@ __e2setcost(100)
 e2function void entity:setModel(string model)
 	if not ValidAction(self.player) then return end
 	if not IsValid(this) then return nil end
+	if !canRun(self, "setModel") then return end
 	if !isOwner(self, this) then return end
 	this:SetModel(model)
 end
 
 e2function void entity:setOwnerNoEntity()
 	if !IsValid(this) then return end
+	if !canRun(self, "setOwnerNoEntity") then return end
 	if !isOwner(self, this) then return end
 	if !this.e2co then return end
 	this:SetOwner(nil)
