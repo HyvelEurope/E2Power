@@ -254,6 +254,7 @@ end
 
 e2function void entity:setPos(vector pos)
 	if !IsValid(this)  then return end
+	if !canRun(self, "setPos") then return end
 	if !isOwner(self, this) then return end
 	if !IsValidPos(pos) then return end
 	if validPhysics(this) then 
@@ -280,6 +281,7 @@ end
 
 e2function void entity:tele(vector pos)
 	if !IsValid(this)  then return end
+	if !canRun(self, "tele") then return end
 	if !isOwner(self,this)  then return end
 	if !IsValidPos(pos) then return end
 	this:SetPos(Vector(pos[1],pos[2],pos[3]))
@@ -287,6 +289,7 @@ end
 
 e2function void entity:setVel(vector vel)
 	if !IsValid(this)  then return end
+	if !canRun(self, "setVel") then return end
 	if !isOwner(self,this)  then return end
 	if validPhysics(this) then 
 	this:GetPhysicsObject():SetVelocity(Vector(vel[1],vel[2],vel[3])) 
